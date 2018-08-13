@@ -31,7 +31,8 @@ namespace Stargazer.Controllers
         public ActionResult HomePage()
         {
             var picUrl = RequestManager.GetPictureOfTheDayUrl();
-            return View("HomePage","HomeController",picUrl);
+            ViewBag.picUrl = picUrl;
+            return View("HomePage");
         }
     }
 }
