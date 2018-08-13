@@ -11,15 +11,21 @@ namespace Stargazer
 {
     public static class RequestManager
     {
-        public static async Task<string> GetPictureOfTheDay()
+        static string PictureOfTheDayService = "https://api.nasa.gov/planetary/apod?api_key=" + Keyring.NASAKey;
+        public static async Task<JObject> GetPictureOfTheDayJSON()
         {
-            string url = "https://api.nasa.gov/planetary/apod?api_key=" + Keyring.NASAKey;
             HttpClient client = new HttpClient();
-            var response = await client.GetAsync(url);
+            var response = await client.GetAsync(PictureOfTheDayService).ConfigureAwait(false);
             string responseBody = await response.Content.ReadAsStringAsync();
             JObject json = JObject.Parse(responseBody);
-            string picurl = (string)json["url"];
-            return picurl;
+            return json;
+           
+        }
+
+        public static string GetPictureOfTheDayUrl()
+        {
+            JObject json = GetPictureOfTheDayJSON().Result;
+            return (string)json["url"];
         }
     }
 }
