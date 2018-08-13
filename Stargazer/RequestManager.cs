@@ -9,9 +9,9 @@ using System.Web;
 
 namespace Stargazer
 {
-    public class RequestManager
+    public static class RequestManager
     {
-        public async Task<string> GetPictureOfTheDay()
+        public static async Task<string> GetPictureOfTheDay()
         {
             string url = "https://api.nasa.gov/planetary/apod?api_key=" + Keyring.NASAKey;
             HttpClient client = new HttpClient();

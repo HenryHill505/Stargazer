@@ -27,5 +27,11 @@ namespace Stargazer.Controllers
 
             return View();
         }
+
+        public ActionResult HomePage()
+        {
+            var picUrl = RequestManager.GetPictureOfTheDay();
+            return View(picUrl);
+        }
     }
 }
