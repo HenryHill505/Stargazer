@@ -7,7 +7,7 @@ namespace Stargazer
 {
     public class CosmicBody
     {
-        public int magnitude;
+        public double magnitude;
         public string name;
     }
 }

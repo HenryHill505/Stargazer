@@ -10,6 +10,8 @@ namespace Stargazer
         {
             ConfigureAuth(app);
 
+            RequestManager.GetCometList();
+
         }
     }
 }

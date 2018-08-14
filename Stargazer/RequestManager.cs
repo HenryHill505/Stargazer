@@ -29,13 +29,30 @@ namespace Stargazer
             return (string)json["url"];
         }
 
-        public static async Task<JObject> GetCometJSON()
+        public static async Task<JArray> GetCometJSON()
         {
             HttpClient client = new HttpClient();
             var response = await client.GetAsync(NearEarthCometsService).ConfigureAwait(false);
             string responseBody = await response.Content.ReadAsStringAsync();
-            JObject json = JObject.Parse(responseBody);
+            JArray json = JArray.Parse(responseBody);
             return json;
+        }
+
+        public static List<Comet> GetCometList()
+        {
+            List<Comet> comets = new List<Comet>();
+
+            JArray json = GetCometJSON().Result;
+            int cometCount = json.Count;
+            for (int i = 0; i < cometCount; i++)
+            {
+                if (json[i]["h_mag"] != null)
+                {
+                    comets.Add(new Comet() { name = (string)json[i]["designation"], magnitude = (double)json[i]["h_mag"] });
+                }
+            }
+
+            return comets;
         }
     }
 }
