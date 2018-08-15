@@ -83,7 +83,7 @@ namespace Stargazer
             return comet;
         } 
 
-        public static void GetLightPollutionData(double latitude, double longitude, double distance, double magnitude)
+        public static List<LightPoint> GetLightPollutionData(double latitude, double longitude, double distance, double magnitude)
         {
             List<LightPoint> lightPoints = new List<LightPoint>();
             string queryUrl = DatastroLightPollution + "&geofilter.distance=" + latitude + "," + longitude + "," + distance;
@@ -96,6 +96,7 @@ namespace Stargazer
                     lightPoints.Add(new LightPoint() {latitude = (double)json["records"][i]["fields"]["coord"][0], longitude = (double)json["records"][i]["fields"]["coord"][1], limitingMagnitude = (double)json["records"][i]["fields"]["limitingmag"] });
                 }
             }
+            return lightPoints;
         }
     }
 }

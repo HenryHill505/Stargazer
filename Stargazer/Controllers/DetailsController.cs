@@ -25,9 +25,10 @@ namespace Stargazer.Controllers
             }
         }
 
-        public ActionResult GetCometDetails(string identifier)
+        private ActionResult GetCometDetails(string identifier)
         {
             Comet comet = RequestManager.GetCometDetails(identifier);
+            ViewBag.GoogleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + Keyring.GoogleMapsKey;
             return View("Comet", comet);
         }
     }

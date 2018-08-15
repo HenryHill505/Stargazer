@@ -7,3 +7,38 @@
 
 <h2>@Model.magnitude</h2>
 
+
+<div id="map" style="height: 300px; width: 300px"></div>
+
+<script src=@ViewBag.GoogleMapsUrl
+        async defer></script>
+<script>
+    var geocoder;
+    var map;
+    function initMap() {
+        geocoder = new google.maps.Geocoder();
+        var uluru = { lat: -25.344, lng: 131.036 }
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: uluru,
+            zoom: 15
+        });
+        var marker = new google.maps.Marker({ position: uluru, map: map });
+        codeAddress();
+    }
+
+    function codeAddress() {
+        var address = "313 N Plankinton Ave";
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == 'OK') {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+</script>
+
