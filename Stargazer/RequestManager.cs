@@ -13,7 +13,7 @@ namespace Stargazer
     {
         static string PictureOfTheDayService = "https://api.nasa.gov/planetary/apod?api_key=" + Keyring.NASAKey;
         static string NearEarthCometsService = "https://data.nasa.gov/resource/2vr3-k9wn.json";
-        public static async Task<JObject> GetPictureOfTheDayJSON()
+        private static async Task<JObject> GetPictureOfTheDayJSON()
         {
             HttpClient client = new HttpClient();
             var response = await client.GetAsync(PictureOfTheDayService).ConfigureAwait(false);
@@ -29,7 +29,16 @@ namespace Stargazer
             return (string)json["url"];
         }
 
-        public static async Task<JArray> GetCometJSON()
+        private static async Task<JObject> GetJsonObject(string url)
+        {
+            HttpClient client = new HttpClient();
+            var response = await client.GetAsync(url).ConfigureAwait(false);
+            string responseBody = await response.Content.ReadAsStringAsync();
+            JObject json = JObject.Parse(responseBody);
+            return json;
+        }
+
+        private static async Task<JArray> GetCometJSON()
         {
             HttpClient client = new HttpClient();
             var response = await client.GetAsync(NearEarthCometsService).ConfigureAwait(false);
@@ -53,6 +62,14 @@ namespace Stargazer
             }
 
             return comets;
+        }
+
+        public static Comet GetCometDetails(string identifier)
+        {
+            string queryUrl = NearEarthCometsService + "?designation" + identifier;
+            JObject cometJson = GetJsonObject(identifier).Result;
+            Comet comet = new Comet() { name = (string)cometJson["designation"], magnitude = (double)cometJson["magnitude"] };
+            return comet;
         }
     }
 }
