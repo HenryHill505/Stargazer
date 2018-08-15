@@ -13,5 +13,21 @@ namespace Stargazer.Controllers
         {
             return View();
         }
+
+        public ActionResult GetDetails(string identifier, string type)
+        {
+            switch (type)
+            {
+                case "comet":
+                    return GetCometDetails(identifier);
+                default:
+                    return Index();
+            }
+        }
+
+        public ActionResult GetCometDetails(string identifier)
+        {
+            return
+        }
     }
 }
