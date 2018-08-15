@@ -27,7 +27,8 @@ namespace Stargazer.Controllers
 
         public ActionResult GetCometDetails(string identifier)
         {
-            return
+            Comet comet = RequestManager.GetCometDetails(identifier);
+            return View("Comet", comet);
         }
     }
 }
