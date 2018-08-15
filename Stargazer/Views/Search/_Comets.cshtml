@@ -1,1 +1,10 @@
-﻿
+﻿@model List<Comet>
+
+<table>
+    @foreach (Comet comet in Model)
+    {
+        <tr>
+            <td>@comet.name</td>
+        </tr>
+    }
+</table>

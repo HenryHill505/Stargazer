@@ -13,5 +13,11 @@ namespace Stargazer.Controllers
         {
             return View();
         }
+
+        public ActionResult GetComets()
+        {
+            List<Comet> comets = RequestManager.GetCometList();
+            return PartialView("_Comets", comets);
+        }
     }
 }
