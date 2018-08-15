@@ -14,6 +14,7 @@ namespace Stargazer
         static string PictureOfTheDayService = "https://api.nasa.gov/planetary/apod?api_key=" + Keyring.NASAKey;
         static string NearEarthCometsService = "https://data.nasa.gov/resource/2vr3-k9wn.json";
         static string DatastroLightPollution = "https://www.datastro.eu/api/records/1.0/search/?dataset=imageserver&sort=-dist&facet=localdate&facet=utdate&facet=limitingmag&facet=cloudcover&facet=constellation&facet=country&facet=filename";
+        static string GooglePlaces = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
         private static async Task<JObject> GetPictureOfTheDayJSON()
         {
             HttpClient client = new HttpClient();
@@ -97,6 +98,17 @@ namespace Stargazer
                 }
             }
             return lightPoints;
+        }
+
+        public static void GetNearbyViewingPlaces(List<LightPoint> viewingPoints)
+        {
+            int searchRadius = 1500;
+            foreach (LightPoint viewingPoint in viewingPoints)
+            {
+                string queryUrl = GooglePlaces + viewingPoint.latitude + ", " + viewingPoint.latitude + "&radius=" + searchRadius + "&type=park" + "&key=" + Keyring.GoogleMapsKey;
+                JObject json = GetJsonObject(queryUrl).Result;
+
+            }
         }
     }
 }

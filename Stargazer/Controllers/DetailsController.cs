@@ -28,12 +28,13 @@ namespace Stargazer.Controllers
         public void GetViewingPlaces(double latitude, double longitude, double magnitude)
         {
             List<LightPoint> viewingPoints = RequestManager.GetLightPollutionData(latitude, longitude, 25000, magnitude);
+            RequestManager.GetNearbyViewingPlaces();
         }
 
         private ActionResult GetCometDetails(string identifier)
         {
             Comet comet = RequestManager.GetCometDetails(identifier);
-            ViewBag.GoogleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + Keyring.GoogleMapsKey;
+            ViewBag.GoogleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + Keyring.GoogleMapsKey + "&callback = initMap";
             return View("Comet", comet);
         }
     }
