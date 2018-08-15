@@ -205,6 +205,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LightPoint.cs" />
     <Compile Include="Migrations\201808151629416_Events.cs" />
     <Compile Include="Migrations\201808151629416_Events.Designer.cs">
       <DependentUpon>201808151629416_Events.cs</DependentUpon>

@@ -9,7 +9,7 @@ namespace Stargazer
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            RequestManager.GetLightPollutionData(43, -87, 40000, 4);
+            RequestManager.GetLightPollutionData(45, -88, 50000, 3);
         }
     }
 }

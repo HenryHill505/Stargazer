@@ -81,13 +81,21 @@ namespace Stargazer
             JArray cometJson = GetJsonArray(queryUrl).Result;
             Comet comet = new Comet() { name = (string)cometJson[0]["designation"], magnitude = (double)cometJson[0]["h_mag"] };
             return comet;
-        }
+        } 
 
         public static void GetLightPollutionData(double latitude, double longitude, double distance, double magnitude)
         {
+            List<LightPoint> lightPoints = new List<LightPoint>();
             string queryUrl = DatastroLightPollution + "&geofilter.distance=" + latitude + "," + longitude + "," + distance;
             JObject json = GetJsonObject(queryUrl).Result;
-            var result = json["records"][0];
+            int resultsCount = json["records"].Count();
+            for (int i = 0; i < resultsCount ; i++)
+            {
+                if ((double)json["records"][i]["fields"]["limitingmag"] >= magnitude)
+                {
+                    lightPoints.Add(new LightPoint() {latitude = (double)json["records"][i]["fields"]["coord"][0], longitude = (double)json["records"][i]["fields"]["coord"][1], limitingMagnitude = (double)json["records"][i]["fields"]["limitingmag"] });
+                }
+            }
         }
     }
 }
