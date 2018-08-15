@@ -83,7 +83,7 @@ namespace Stargazer
             return comet;
         }
 
-        public static void GetLightPollution(double latitude, double longitude, double distance, double magnitude)
+        public static void GetLightPollutionData(double latitude, double longitude, double distance, double magnitude)
         {
             string queryUrl = DatastroLightPollution + "&geofilter.distance=" + latitude + "," + longitude + "," + distance;
             JObject json = GetJsonObject(queryUrl).Result;
