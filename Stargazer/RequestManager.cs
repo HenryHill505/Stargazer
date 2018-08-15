@@ -38,6 +38,15 @@ namespace Stargazer
             return json;
         }
 
+        private static async Task<JArray> GetJsonArray(string url)
+        {
+            HttpClient client = new HttpClient();
+            var response = await client.GetAsync(url).ConfigureAwait(false);
+            string responseBody = await response.Content.ReadAsStringAsync();
+            JArray json = JArray.Parse(responseBody);
+            return json;
+        }
+
         private static async Task<JArray> GetCometJSON()
         {
             HttpClient client = new HttpClient();
@@ -66,9 +75,10 @@ namespace Stargazer
 
         public static Comet GetCometDetails(string identifier)
         {
-            string queryUrl = NearEarthCometsService + "?designation" + identifier;
-            JObject cometJson = GetJsonObject(identifier).Result;
-            Comet comet = new Comet() { name = (string)cometJson["designation"], magnitude = (double)cometJson["magnitude"] };
+            string queryUrl = NearEarthCometsService + "?designation=" + identifier;
+            queryUrl = queryUrl.Replace(" ", "%20");
+            JArray cometJson = GetJsonArray(queryUrl).Result;
+            Comet comet = new Comet() { name = (string)cometJson[0]["designation"], magnitude = (double)cometJson[0]["h_mag"] };
             return comet;
         }
     }
