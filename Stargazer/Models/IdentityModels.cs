@@ -29,5 +29,7 @@ namespace Stargazer.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Event> Events { get; set; }
     }
 }
