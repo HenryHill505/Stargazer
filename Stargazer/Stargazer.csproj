@@ -272,6 +272,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\HomePage.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Search\_Comets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
