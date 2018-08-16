@@ -27,7 +27,7 @@ namespace Stargazer.Controllers
 
         public List<ViewingPlace> GetViewingPlaces(double latitude, double longitude, double magnitude)
         {
-            List<LightPoint> viewingPoints = RequestManager.GetLightPollutionData(latitude, longitude, 25000, magnitude);
+            List<LightPoint> viewingPoints = RequestManager.GetLightPollutionData(latitude, longitude, 6000000, magnitude);
             List<ViewingPlace> viewingPlaces = RequestManager.GetNearbyViewingPlaces(viewingPoints);
             return viewingPlaces;
         }
@@ -35,7 +35,7 @@ namespace Stargazer.Controllers
         public ActionResult Map(double latitude, double longitude, double magnitude)
         {
             List<ViewingPlace> viewingPlaces = GetViewingPlaces(latitude, longitude, magnitude);
-            ViewBag.GoogleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + Keyring.GoogleMapsKey + "&callback = initMap";
+            ViewBag.GoogleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + Keyring.GoogleMapsKey + "&callback=initMap";
             return PartialView("_Map", viewingPlaces);
         }
 

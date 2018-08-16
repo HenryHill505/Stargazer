@@ -103,13 +103,14 @@ namespace Stargazer
         public static List<ViewingPlace> GetNearbyViewingPlaces(List<LightPoint> viewingPoints)
         {
             List<ViewingPlace> places = new List<ViewingPlace>();
-            int searchRadius = 1500;
+            int searchRadius = 200000;
             foreach (LightPoint viewingPoint in viewingPoints)
             {
-                string queryUrl = GooglePlaces + viewingPoint.latitude + ", " + viewingPoint.latitude + "&radius=" + searchRadius + "&type=park" + "&key=" + Keyring.GoogleMapsKey;
+                string queryUrl = GooglePlaces + viewingPoint.latitude + ", " + viewingPoint.longitude + "&radius=" + searchRadius + "&type=park" + "&key=" + Keyring.GoogleMapsKey;
                 JObject json = GetJsonObject(queryUrl).Result;
 
-                //if (json["results"][0]["types"].Contains("park"))
+                //if (json["results"][0]["types"].Contains("park
+                //Should add an if statement to handle json is empty
                 places.Add(new ViewingPlace() { name = (string)json["results"][0]["name"], latitude = (double)json["results"][0]["geometry"]["location"]["lat"], longitude = (double)json["results"][0]["geometry"]["location"]["lng"], vicinity = (string)json["results"][0]["vicinity"] });
             }
             return places;

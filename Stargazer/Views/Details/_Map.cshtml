@@ -10,10 +10,10 @@
     function initMap() {
         var places = [];
         @{int numberOfPlaces = Model.Count;}
-        @for(int i = 0; i < numberOfPlaces; i++)
+        @*@for(int i = 0; i < numberOfPlaces; i++)
         {
             <text>
-                
+        alert(i);
                 var place@(i) = {
                     name: @Model[i].name,
                     vicinity: @Model[i].vicinity,
@@ -22,7 +22,17 @@
                 }
                 places.push(place@(i)));
             </text>
-        }
+        }*@
+
+        @*@for(int i = 0; i < numberOfPlaces; i++)
+        {
+            <text>
+                places[i][0] = "@Model[i].name";
+                places[i][0] = "@Model[i].vicinity";
+                places[i][0] = "@Model[i].latitude";
+                places[i][0] = "@Model[i].longitude";
+            </text>
+        }*@
 
         geocoder = new google.maps.Geocoder();
         var uluru = { lat: -25.344, lng: 131.036 }
@@ -30,8 +40,31 @@
             center: uluru,
             zoom: 15
         });
-        var marker = new google.maps.Marker({ position: uluru, map: map });
-        codeAddress();
+        //var marker = new google.maps.Marker({ position: uluru, map: map });
+
+        @foreach(ViewingPlace place in Model)
+        {
+            <text>
+        var markerlatLng = new google.maps.LatLng(@(place.latitude), @(place.longitude));
+        var name = "@(place.name)";
+        var vicinity = "@(place.vicinity)";
+        var contentString = '<h6>' + name + '</h6>';
+        var infowindow = new google.maps.InfoWindow({ content: contentString });
+        var marker = new google.maps.Marker({
+            position: markerlatLng,
+            title: name,
+            map: map,
+            draggable: false
+        });
+        google.maps.event.addListener(marker, 'click', function () {
+            infowindow.open(map, marker);
+        })
+            </text>
+        }
+
+
+        //codeAddress();
+
     }
 
     function codeAddress() {
