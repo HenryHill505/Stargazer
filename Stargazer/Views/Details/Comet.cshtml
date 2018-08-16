@@ -7,9 +7,34 @@
 
 <h2>@Model.magnitude</h2>
 
-@Ajax.ActionLink("Map", "Map", new { latitude = 43.033580, longitude = -87.911910, magnitude = 1 }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "map-box", InsertionMode = InsertionMode.Replace })
+<label>
+    Latitude
+    <input id ="latitude" type="text" value="43.033580"/>
+</label>
+
+<label>
+    Longitude
+    <input id ="longitude" type="text" value="-87.911910"/>
+</label>
+
+<button id="map-button">Comet</button>
+@*@Ajax.ActionLink("Map", "Map", new { latitude = 43.033580, longitude = -87.911910, magnitude = 1 }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "map-box", InsertionMode = InsertionMode.Replace })*@
+
 
 <div id="map-box">
 
 </div>
+
+<script src="/Scripts/jquery-3.3.1.js"></script>
+<script>
+    $("document").ready(function () {
+        $("#map-button").click(function () {
+            let latitude = $("#latitude").val();
+            let longitude = $("#longitude").val();
+            let urlString = "/Details/Map?latitude=" + latitude + "&longitude=" + longitude + "&magnitude=1";
+            $("#map-box").load(urlString);
+
+        })
+    })
+</script>
 
