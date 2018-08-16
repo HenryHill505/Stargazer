@@ -100,15 +100,19 @@ namespace Stargazer
             return lightPoints;
         }
 
-        public static void GetNearbyViewingPlaces(List<LightPoint> viewingPoints)
+        public static List<ViewingPlace> GetNearbyViewingPlaces(List<LightPoint> viewingPoints)
         {
+            List<ViewingPlace> places = new List<ViewingPlace>();
             int searchRadius = 1500;
             foreach (LightPoint viewingPoint in viewingPoints)
             {
                 string queryUrl = GooglePlaces + viewingPoint.latitude + ", " + viewingPoint.latitude + "&radius=" + searchRadius + "&type=park" + "&key=" + Keyring.GoogleMapsKey;
                 JObject json = GetJsonObject(queryUrl).Result;
 
+                //if (json["results"][0]["types"].Contains("park"))
+                places.Add(new ViewingPlace() { name = (string)json["results"][0]["name"], latitude = (double)json["results"][0]["geometry"]["location"]["lat"], longitude = (double)json["results"][0]["geometry"]["location"]["lng"] });
             }
+            return places;
         }
     }
 }

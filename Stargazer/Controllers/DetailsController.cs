@@ -25,10 +25,11 @@ namespace Stargazer.Controllers
             }
         }
 
-        public void GetViewingPlaces(double latitude, double longitude, double magnitude)
+        public List<ViewingPlace> GetViewingPlaces(double latitude, double longitude, double magnitude)
         {
             List<LightPoint> viewingPoints = RequestManager.GetLightPollutionData(latitude, longitude, 25000, magnitude);
-            RequestManager.GetNearbyViewingPlaces();
+            List<ViewingPlace> viewingPlaces = RequestManager.GetNearbyViewingPlaces(viewingPoints);
+            return viewingPlaces;
         }
 
         private ActionResult GetCometDetails(string identifier)

@@ -7,5 +7,9 @@ namespace Stargazer
 {
     public class ViewingPlace
     {
+        public double latitude;
+        public double longitude;
+        public string name;
+        public List<string> types;
     }
 }
