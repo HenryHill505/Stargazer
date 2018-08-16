@@ -32,10 +32,11 @@ namespace Stargazer.Controllers
             return viewingPlaces;
         }
 
-        public ActionResult Map()
+        public ActionResult Map(double latitude, double longitude, double magnitude)
         {
+            List<ViewingPlace> viewingPlaces = GetViewingPlaces(latitude, longitude, magnitude);
             ViewBag.GoogleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + Keyring.GoogleMapsKey + "&callback = initMap";
-            return PartialView("_Map");
+            return PartialView("_Map", viewingPlaces);
         }
 
         private ActionResult GetCometDetails(string identifier)

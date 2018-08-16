@@ -10,6 +10,7 @@ namespace Stargazer
         public double latitude;
         public double longitude;
         public string name;
+        public string vicinity;
         public List<string> types;
     }
 }

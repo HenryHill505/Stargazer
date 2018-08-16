@@ -110,7 +110,7 @@ namespace Stargazer
                 JObject json = GetJsonObject(queryUrl).Result;
 
                 //if (json["results"][0]["types"].Contains("park"))
-                places.Add(new ViewingPlace() { name = (string)json["results"][0]["name"], latitude = (double)json["results"][0]["geometry"]["location"]["lat"], longitude = (double)json["results"][0]["geometry"]["location"]["lng"] });
+                places.Add(new ViewingPlace() { name = (string)json["results"][0]["name"], latitude = (double)json["results"][0]["geometry"]["location"]["lat"], longitude = (double)json["results"][0]["geometry"]["location"]["lng"], vicinity = (string)json["results"][0]["vicinity"] });
             }
             return places;
         }
