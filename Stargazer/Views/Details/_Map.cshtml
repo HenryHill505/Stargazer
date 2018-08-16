@@ -1,4 +1,6 @@
-﻿<div id="map" style="height: 300px; width: 300px"></div>
+﻿@model List<ViewingPlace>
+
+<div id="map" style="height: 300px; width: 300px"></div>
 
 <script src=@ViewBag.GoogleMapsUrl
         async defer></script>
@@ -6,6 +8,22 @@
     var geocoder;
     var map;
     function initMap() {
+        var places = [];
+        @{int numberOfPlaces = Model.Count}
+        @for(int i = 0; i < numberOfPlaces; i++)
+        {
+            <text>
+                
+                var place@(i) = {
+                    name: @Model[i].name,
+                    vicinity: @Model[i].vicinity,
+                    lat: @Model[i].latitude,
+                    long: @Model[i].longitude,
+                }
+                places.push(place@(i)));
+            </text>
+        }
+
         geocoder = new google.maps.Geocoder();
         var uluru = { lat: -25.344, lng: 131.036 }
         map = new google.maps.Map(document.getElementById('map'), {
