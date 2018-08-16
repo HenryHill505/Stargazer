@@ -48,7 +48,7 @@
         var markerlatLng = new google.maps.LatLng(@(place.latitude), @(place.longitude));
         var name = "@(place.name)";
         var vicinity = "@(place.vicinity)";
-        var contentString = '<h6>' + name + '</h6>';
+        var contentString = '<h6>' + name + '</h6>' + '<p>' + vicinity + '</p>' ;
         var infowindow = new google.maps.InfoWindow({ content: contentString });
         var marker = new google.maps.Marker({
             position: markerlatLng,
