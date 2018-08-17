@@ -1,9 +1,12 @@
-﻿@model Comet
+﻿@using Microsoft.AspNet.Identity
+@model Comet
 @{
     ViewBag.Title = "View";
 }
 
-<h2>@Model.name</h2>
+@Html.Hidden("UserId",User.Identity.GetUserId(), new {id = "user-id" })
+
+<h2 id="body-name">@Model.name</h2>
 
 <h2>@Model.magnitude</h2>
 

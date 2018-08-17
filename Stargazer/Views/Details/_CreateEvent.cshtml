@@ -1,11 +1,22 @@
 ﻿<h2>Create Event</h2>
-
-<input id="date-value"/>
+<label>
+    Date
+    <input id="date-value" />
+</label>
 <input id="location"/>
 <button id ="create-event"/>
 
+<div id="result-box">
+
+</div>
+
 <script>
     $(".create-event").click(function () {
-            
+        let date = $("#date-value").val();
+        let userId = $("#user-id").val();
+        let location = $("#location").val();
+        let cosmicBody = $("#body-name").val();
+        let url = "/Details/CreateEvent?userId=" + userId + "&date=" + date + "&location=" + location + "&cosmicBody=" + cosmicBody;
+        $("#result-box").load()
     })
 </script>
