@@ -287,6 +287,7 @@
     <Content Include="Views\Details\Comet.cshtml" />
     <Content Include="Views\Details\_Map.cshtml" />
     <Content Include="Views\Details\_CreateEvent.cshtml" />
+    <Content Include="Views\Home\Event.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

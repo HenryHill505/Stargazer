@@ -9,3 +9,13 @@
 </h2>
 <img src="@(ViewBag.picUrl)" alt="Alternate Text" />
 
+<h3>Events</h3>
+<table>
+    <tr>
+        @foreach(Event newEvent in Model)
+        {
+            <td>@Html.ActionLink(newEvent.Date.ToString(), "EventDetails", newEvent.Id)</td>
+        }
+    </tr>
+</table>
+
