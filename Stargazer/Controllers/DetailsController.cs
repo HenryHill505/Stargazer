@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Stargazer.Models;
 
 namespace Stargazer.Controllers
 {
@@ -39,11 +40,30 @@ namespace Stargazer.Controllers
             return PartialView("_Map", viewingPlaces);
         }
 
+        public void CreateEvent(string userId, string date, string location, string cosmicBody)
+        {
+            try
+            {
+                Event newEvent = new Event();
+                newEvent.UserId = userId;
+                newEvent.Date = DateTime.Parse(date);
+                newEvent.Location = location;
+                newEvent.CosmicBody = cosmicBody;
+            }
+
+            catch
+            {
+
+            }
+        }
+
         private ActionResult GetCometDetails(string identifier)
         {
             Comet comet = RequestManager.GetCometDetails(identifier);
             
             return View("Comet", comet);
         }
+
+
     }
 }
