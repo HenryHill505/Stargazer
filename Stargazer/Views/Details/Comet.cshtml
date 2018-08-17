@@ -17,11 +17,17 @@
     <input id ="longitude" type="text" value="-87.911910"/>
 </label>
 
-<button id="map-button">Comet</button>
+<button id="map-button">Map</button>
 @*@Ajax.ActionLink("Map", "Map", new { latitude = 43.033580, longitude = -87.911910, magnitude = 1 }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "map-box", InsertionMode = InsertionMode.Replace })*@
 
 
 <div id="map-box">
+
+</div>
+
+<button id="event-button">Event</button>
+
+<div id="event-box">
 
 </div>
 
@@ -34,6 +40,9 @@
             let urlString = "/Details/Map?latitude=" + latitude + "&longitude=" + longitude + "&magnitude=1";
             $("#map-box").load(urlString);
 
+        })
+        $("#event-button").click(function () {
+            $("#event-box").load("/Details/GetEventPartial");
         })
     })
 </script>
