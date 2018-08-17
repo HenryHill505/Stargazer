@@ -9,6 +9,7 @@ namespace Stargazer.Controllers
 {
     public class DetailsController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
         // GET: Details
         public ActionResult Index()
         {
@@ -40,7 +41,12 @@ namespace Stargazer.Controllers
             return PartialView("_Map", viewingPlaces);
         }
 
-        public void CreateEvent(string userId, string date, string location, string cosmicBody)
+        public ActionResult GetEventPartial()
+        {
+            return PartialView("_CreateEvent");
+        }
+
+        public string CreateEvent(string userId, string date, string location, string cosmicBody)
         {
             try
             {
@@ -49,11 +55,14 @@ namespace Stargazer.Controllers
                 newEvent.Date = DateTime.Parse(date);
                 newEvent.Location = location;
                 newEvent.CosmicBody = cosmicBody;
+                db.Events.Add(newEvent);
+                db.SaveChanges();
+                return "Event created successfully";
             }
 
             catch
             {
-
+                return "Event was not created. Check to make all fields have a valid format";
             }
         }
 
@@ -63,7 +72,5 @@ namespace Stargazer.Controllers
             
             return View("Comet", comet);
         }
-
-
     }
 }
