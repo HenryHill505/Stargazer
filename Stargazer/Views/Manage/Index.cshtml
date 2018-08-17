@@ -26,16 +26,18 @@
         </dd>
         <dt>Your Upcoming Events</dt>
         <dd>
-            <table>
+            <ul>
                 @foreach (Event newEvent in Model.events)
                 {
-                    <tr>
-                        <td>@newEvent.CosmicBody</td>
-                        <td>@newEvent.Date</td>
-                        <td>@newEvent.Location</td>
-                    </tr>
+                    <li>
+                        <a href="/Home/EventDetails?Id=@newEvent.Id">
+                            <span>@newEvent.CosmicBody</span>
+                            <span>@newEvent.Date</span>
+                            <span>@newEvent.Location</span>
+                        </a>
+                    </li>
                 }
-            </table>
+            </ul>
         </dd>
         @*<dt>External Logins:</dt>
         <dd>
