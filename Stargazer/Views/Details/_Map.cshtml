@@ -10,29 +10,9 @@
     function initMap() {
         var places = [];
         @{int numberOfPlaces = Model.Count;}
-        @*@for(int i = 0; i < numberOfPlaces; i++)
-        {
-            <text>
-        alert(i);
-                var place@(i) = {
-                    name: @Model[i].name,
-                    vicinity: @Model[i].vicinity,
-                    lat: @Model[i].latitude,
-                    long: @Model[i].longitude,
-                }
-                places.push(place@(i)));
-            </text>
-        }*@
 
-        @*@for(int i = 0; i < numberOfPlaces; i++)
-        {
-            <text>
-                places[i][0] = "@Model[i].name";
-                places[i][0] = "@Model[i].vicinity";
-                places[i][0] = "@Model[i].latitude";
-                places[i][0] = "@Model[i].longitude";
-            </text>
-        }*@
+
+
 
         geocoder = new google.maps.Geocoder();
         var uluru = { lat: -25.344, lng: 131.036 }
@@ -41,6 +21,33 @@
             zoom: 15
         });
         //var marker = new google.maps.Marker({ position: uluru, map: map });
+
+
+        @*@for (int i = 0; i < numberOfPlaces; i++)
+        {
+            <text>
+                alert("i");
+                var place"@(i)" = {
+                    name: "@Model[i].name",
+                vicinity: "@Model[i].vicinity",
+                lat: "@Model[i].latitude",
+                long: "@Model[i].longitude",
+            }
+            places.push(place@(i)));
+            </text>
+        }*@
+
+
+        @*@for (int i = 0; i < numberOfPlaces; i++)
+        {
+            <text>
+                var i = @(i);
+                places[i][0] = "@Model[i].name";
+                places[i][0] = "@Model[i].vicinity";
+                places[i][0] = "@Model[i].latitude";
+                places[i][0] = "@Model[i].longitude";
+            </text>
+        }*@
 
         @foreach(ViewingPlace place in Model)
         {
@@ -58,9 +65,13 @@
         });
         google.maps.event.addListener(marker, 'click', function () {
             infowindow.open(map, marker);
+            alert("hit")
         })
+
+
             </text>
         }
+
 
 
         //codeAddress();
