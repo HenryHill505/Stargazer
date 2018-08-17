@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stargazer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -9,6 +10,8 @@ namespace Stargazer.Controllers
 {
     public class HomeController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext(); 
+
         public ActionResult Index()
         {
             return View();
@@ -32,7 +35,8 @@ namespace Stargazer.Controllers
         {
             var picUrl = RequestManager.GetPictureOfTheDayUrl();
             ViewBag.picUrl = picUrl;
-            return View("HomePage");
+            List<Event> events = db.Events.Where(e => e.Date > DateTime.Today).Take(50).OrderBy(e => e.Date).ToList();
+            return View("HomePage", events);
         }
     }
 }
