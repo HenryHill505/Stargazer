@@ -38,5 +38,11 @@ namespace Stargazer.Controllers
             List<Event> events = db.Events.Where(e => e.Date > DateTime.Today).Take(50).OrderBy(e => e.Date).ToList();
             return View("HomePage", events);
         }
+
+        public ActionResult EventDetails(int Id)
+        {
+            Event selectedEvent = db.Events.Where(e => e.Id == Id).FirstOrDefault();
+            return View("EventDetails", selectedEvent);
+        }
     }
 }

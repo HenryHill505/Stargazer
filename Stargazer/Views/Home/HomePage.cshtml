@@ -14,7 +14,7 @@
     <tr>
         @foreach(Event newEvent in Model)
         {
-            <td>@Html.ActionLink(newEvent.Date.ToString(), "EventDetails", newEvent.Id)</td>
+            <td>@Html.ActionLink(newEvent.Date.ToString(), "EventDetails", new {Id = newEvent.Id})</td>
         }
     </tr>
 </table>
