@@ -34,19 +34,17 @@ namespace Stargazer.Controllers
             return viewingPlaces;
         }
 
-        public void GetLatitude()
-        {
-
-        }
-
-        public void GetLongitude()
-        {
-
-        }
-
         public ActionResult Map(double latitude, double longitude, double magnitude)
         {
             List<ViewingPlace> viewingPlaces = GetViewingPlaces(latitude, longitude, magnitude);
+            ViewBag.GoogleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + Keyring.GoogleMapsKey + "&callback=initMap";
+            return PartialView("_Map", viewingPlaces);
+        }
+
+        public ActionResult Map(string address, double magnitude)
+        {
+            Dictionary<string, double> coordinates = RequestManager.GeocodeAddress(address);
+            List<ViewingPlace> viewingPlaces = GetViewingPlaces(coordinates["latitude"], coordinates["longitude"], magnitude);
             ViewBag.GoogleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + Keyring.GoogleMapsKey + "&callback=initMap";
             return PartialView("_Map", viewingPlaces);
         }
