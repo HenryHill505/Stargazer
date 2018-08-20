@@ -130,10 +130,17 @@ namespace Stargazer
             return places;
         }
 
-        public static void GetWeatherForecast(double latitude, double longitude)
+        public static Object GetWeatherForecast(double latitude, double longitude)
         {
+            
             string url = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&APPID=" + Keyring.OpenWeatherKey;
             JObject json = GetJsonObject(url).Result;
+            string description = (string)json["list"][0]["weather"]["description"];
+            double clouds = (double)json["list"][0]["clouds"]["all"];
+
+            var result = new { description = description, clouds = clouds};
+
+            return result;
         }
     }
 }
