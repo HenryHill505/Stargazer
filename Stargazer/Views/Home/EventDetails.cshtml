@@ -1,4 +1,5 @@
 ﻿@using Stargazer.Models
+@using Microsoft.AspNet.Identity
 @model Event
 @{
     ViewBag.Title = "EventDetails";
@@ -9,7 +10,35 @@
 <h2>@Model.CosmicBody</h2>
 <h2>@Model.Date</h2>
 <h2>@Model.Location</h2>
-<h2>@Model.User</h2>
+<h2>@Model.UserId</h2>
+
+@if (User.Identity.IsAuthenticated && User.Identity.GetUserId() != Model.UserId)
+{
+    <button id="subscribe-button">Subscribe To This Event</button>
+    <div id="feedback-box"></div>
+
+    @Html.Hidden("Cosmic Body", Model.CosmicBody, new { id = "cosmic-body" })
+    @Html.Hidden("Date", Model.Date, new { id = "date" })
+    @Html.Hidden("Location", Model.Location, new { id = "location" })
+}
+
+    <script src="/Scripts/jquery-3.3.1.js"></script>
+
+<script>
+    $("document").ready(function () {
+        $("#subscribe-button").click(function () {
+            let body = $("#cosmic-body").val();
+            let date = $("#date").val();
+            let location = $("#location").val();
+            url = "/Home/AddEvent?body=" + body + "&date=" + date + "&location=" + location;
+            url = url.replace(" ", "%20");
+            url = url.replace(" ", "%20");
+            url = url.replace(" ", "%20");
+            url = url.replace(" ", "%20");
+            $("#feedback-box").load(url);
+        })
+    })
+</script>
 
 
 

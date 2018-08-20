@@ -1,10 +1,12 @@
 ﻿using Stargazer.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+
 
 namespace Stargazer.Controllers
 {
@@ -43,6 +45,16 @@ namespace Stargazer.Controllers
         {
             Event selectedEvent = db.Events.Where(e => e.Id == Id).FirstOrDefault();
             return View("EventDetails", selectedEvent);
+        }
+
+        public string AddEvent(string body, DateTime date, string location)
+        {
+            //Probably better to do this with a junction table
+            string userId = User.Identity.GetUserId();
+            Event newEvent = new Event() { UserId = userId, Date = date, Location = location, CosmicBody = body };
+            db.Events.Add(newEvent);
+            db.SaveChanges();
+            return "success";
         }
     }
 }

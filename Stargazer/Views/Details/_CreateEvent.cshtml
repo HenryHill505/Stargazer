@@ -12,12 +12,13 @@
 
 <script>
     $("#create-event").click(function () {
-        alert("hit");
         let date = $("#date-value").val();
         let userId = $("#user-id").val();
         let location = $("#location").val();
         let cosmicBody = $("#body-name").val();
         let url = "/Details/CreateEvent?userId=" + userId + "&date=" + date + "&location=" + location + "&cosmicBody=" + cosmicBody;
+        url = url.replace(" ", "%20");
+        url = url.replace(" ", "%20");
         $("#result-box").load(url);
     })
 </script>
