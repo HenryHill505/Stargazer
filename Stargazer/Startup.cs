@@ -10,8 +10,6 @@ namespace Stargazer
         {
             ConfigureAuth(app);
 
-            RequestManager.GetImgur("sCFv49v");
-
         }
     }
 }

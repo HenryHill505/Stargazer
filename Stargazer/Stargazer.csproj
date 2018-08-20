@@ -214,12 +214,21 @@
     <Compile Include="Migrations\201808201531013_Address.Designer.cs">
       <DependentUpon>201808201531013_Address.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808202128248_PictureModel.cs" />
+    <Compile Include="Migrations\201808202128248_PictureModel.Designer.cs">
+      <DependentUpon>201808202128248_PictureModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808202131049_PictureModels.cs" />
+    <Compile Include="Migrations\201808202131049_PictureModels.Designer.cs">
+      <DependentUpon>201808202131049_PictureModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CosmicBodyViewModel.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Picture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestManager.cs" />
     <Compile Include="Startup.cs" />
@@ -317,6 +326,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808201531013_Address.resx">
       <DependentUpon>201808201531013_Address.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808202128248_PictureModel.resx">
+      <DependentUpon>201808202128248_PictureModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808202131049_PictureModels.resx">
+      <DependentUpon>201808202131049_PictureModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

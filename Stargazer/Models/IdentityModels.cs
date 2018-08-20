@@ -33,5 +33,6 @@ namespace Stargazer.Models
         }
 
         public DbSet<Event> Events { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
     }
 }
