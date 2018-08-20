@@ -129,5 +129,11 @@ namespace Stargazer
             }
             return places;
         }
+
+        public static void GetWeatherForecast(double latitude, double longitude)
+        {
+            string url = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&APPID=" + Keyring.OpenWeatherKey;
+            JObject json = GetJsonObject(url).Result;
+        }
     }
 }

@@ -9,6 +9,8 @@ namespace Stargazer
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+
+            RequestManager.GetWeatherForecast(35, 139);
         }
     }
 }
