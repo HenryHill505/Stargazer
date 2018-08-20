@@ -10,7 +10,8 @@ namespace Stargazer
         {
             ConfigureAuth(app);
 
-            RequestManager.GetWeatherForecast(35, 139);
+            RequestManager.GetImgur("sCFv49v");
+
         }
     }
 }

@@ -96,7 +96,20 @@ namespace Stargazer
             JArray cometJson = GetJsonArray(queryUrl).Result;
             Comet comet = new Comet() { name = (string)cometJson[0]["designation"], magnitude = (double)cometJson[0]["h_mag"] };
             return comet;
-        } 
+        }
+        
+        public static async Task<string> GetImgur(string imageHash)
+        {
+            string url = "https://api.imgur.com/3/image/" + imageHash;
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", "Client-ID " + Keyring.ImgurClientId);
+            var response = await client.GetAsync(url).ConfigureAwait(false);
+            string responseBody = await response.Content.ReadAsStringAsync();
+            JObject json = JObject.Parse(responseBody);
+
+            string imageUrl = (string)json["data"]["link"];
+            return imageUrl;
+        }
 
         public static List<LightPoint> GetLightPollutionData(double latitude, double longitude, double distance, double magnitude)
         {
@@ -135,7 +148,7 @@ namespace Stargazer
             
             string url = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&APPID=" + Keyring.OpenWeatherKey;
             JObject json = GetJsonObject(url).Result;
-            string description = (string)json["list"][0]["weather"]["description"];
+            string description = (string)json["list"][0]["weather"][0]["description"];
             double clouds = (double)json["list"][0]["clouds"]["all"];
 
             var result = new { description = description, clouds = clouds};
