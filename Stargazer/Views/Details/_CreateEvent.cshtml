@@ -17,8 +17,9 @@
         let location = $("#location").val();
         let cosmicBody = $("#body-name").val();
         let url = "/Details/CreateEvent?userId=" + userId + "&date=" + date + "&location=" + location + "&cosmicBody=" + cosmicBody;
-        url = url.replace(" ", "%20");
-        url = url.replace(" ", "%20");
+        for (i = 0; i < 10; i++) {
+            url = url.replace(" ", "%20");
+        }
         $("#result-box").load(url);
     })
 </script>
