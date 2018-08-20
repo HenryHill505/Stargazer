@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Stargazer.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Stargazer.Controllers
 {
@@ -79,6 +80,9 @@ namespace Stargazer.Controllers
             Comet comet = RequestManager.GetCometDetails(identifier);
             List<Event> events = db.Events.Where(e => e.CosmicBody == comet.name).Where(e => e.Date > DateTime.Today).ToList();
             CosmicBodyViewModel viewModel = new CosmicBodyViewModel() { body = comet, events = events };
+
+            string userId = User.Identity.GetUserId();
+            viewModel.userAddress = db.Users.Where(u => u.Id == userId).Select(u => u.Address).FirstOrDefault();
             
             return View("Comet", viewModel);
         }

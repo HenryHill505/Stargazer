@@ -9,6 +9,6 @@ namespace Stargazer.Models
     {
         public CosmicBody body;
         public List<Event> events;
-
+        public string userAddress;
     }
 }

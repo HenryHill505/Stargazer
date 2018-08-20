@@ -22,6 +22,22 @@
     <input id="longitude" type="text" value="-87.911910" />
 </label>
 
+@if (User.Identity.IsAuthenticated && Model.userAddress != null)
+{
+    <label>
+        Address
+        <input id="address" type="text" value="@Model.userAddress" />
+    </label>
+}
+else
+{
+    <label>
+        Address
+        <input id="address" type="text" />
+    </label>
+}
+
+
 <button id="map-button">Map</button>
 @*@Ajax.ActionLink("Map", "Map", new { latitude = 43.033580, longitude = -87.911910, magnitude = 1 }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "map-box", InsertionMode = InsertionMode.Replace })*@
 
@@ -39,26 +55,26 @@
     </tr>
 </table>
 
-    <button id="event-button">Event</button>
+<button id="event-button">Event</button>
 
 
-    <div id="event-box">
+<div id="event-box">
 
-    </div>
+</div>
 
-    <script src="/Scripts/jquery-3.3.1.js"></script>
-    <script>
-        $("document").ready(function () {
-            $("#map-button").click(function () {
-                let latitude = $("#latitude").val();
-                let longitude = $("#longitude").val();
-                let urlString = "/Details/Map?latitude=" + latitude + "&longitude=" + longitude + "&magnitude=1";
-                $("#map-box").load(urlString);
+<script src="/Scripts/jquery-3.3.1.js"></script>
+<script>
+    $("document").ready(function () {
+        $("#map-button").click(function () {
+            let latitude = $("#latitude").val();
+            let longitude = $("#longitude").val();
+            let urlString = "/Details/Map?latitude=" + latitude + "&longitude=" + longitude + "&magnitude=1";
+            $("#map-box").load(urlString);
 
-            })
-            $("#event-button").click(function () {
-                $("#event-box").load("/Details/GetEventPartial");
-            })
         })
-    </script>
+        $("#event-button").click(function () {
+            $("#event-box").load("/Details/GetEventPartial");
+        })
+    })
+</script>
 
