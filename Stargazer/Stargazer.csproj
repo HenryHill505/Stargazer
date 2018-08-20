@@ -210,6 +210,10 @@
     <Compile Include="Migrations\201808151629416_Events.Designer.cs">
       <DependentUpon>201808151629416_Events.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808201531013_Address.cs" />
+    <Compile Include="Migrations\201808201531013_Address.Designer.cs">
+      <DependentUpon>201808201531013_Address.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CosmicBodyViewModel.cs" />
@@ -309,6 +313,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808151629416_Events.resx">
       <DependentUpon>201808151629416_Events.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808201531013_Address.resx">
+      <DependentUpon>201808201531013_Address.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
