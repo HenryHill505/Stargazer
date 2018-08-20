@@ -34,6 +34,16 @@ namespace Stargazer.Controllers
             return viewingPlaces;
         }
 
+        public void GetLatitude()
+        {
+
+        }
+
+        public void GetLongitude()
+        {
+
+        }
+
         public ActionResult Map(double latitude, double longitude, double magnitude)
         {
             List<ViewingPlace> viewingPlaces = GetViewingPlaces(latitude, longitude, magnitude);

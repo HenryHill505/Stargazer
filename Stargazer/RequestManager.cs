@@ -15,6 +15,20 @@ namespace Stargazer
         static string NearEarthCometsService = "https://data.nasa.gov/resource/2vr3-k9wn.json";
         static string DatastroLightPollution = "https://www.datastro.eu/api/records/1.0/search/?dataset=imageserver&sort=-dist&facet=localdate&facet=utdate&facet=limitingmag&facet=cloudcover&facet=constellation&facet=country&facet=filename";
         static string GooglePlaces = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
+        static string GoogleGeocode = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+
+        public static Dictionary<string, double> GeocodeAddress(string address)
+        {
+            address = address.Replace(" ", "+");
+            string url = GoogleGeocode + address + "&key=" + Keyring.GoogleMapsKey;
+            JObject json = GetJsonObject(url).Result;
+            double latitude = (double)json["results"][0]["geometry"]["location"]["lat"];
+            double longitude = (double)json["results"][0]["geometry"]["location"]["lng"];
+            Dictionary<string, double> coordinates = new Dictionary<string, double>();
+            coordinates.Add("latitude", latitude);
+            coordinates.Add("longitude", longitude);
+            return coordinates;
+        }
         private static async Task<JObject> GetPictureOfTheDayJSON()
         {
             HttpClient client = new HttpClient();
