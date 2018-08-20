@@ -73,7 +73,8 @@ namespace Stargazer.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
                 Address = db.Users.Where(e => e.Id == userId).Select(e => e.Address).FirstOrDefault(),
-                events = db.Events.Where(e => e.UserId == userId).Where(e => e.Date > DateTime.Today).ToList()
+                events = db.Events.Where(e => e.UserId == userId).Where(e => e.Date > DateTime.Today).ToList(),
+                UserId = userId
             };
             return View(model);
         }
@@ -334,6 +335,22 @@ namespace Stargazer.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        [HttpGet]
+        public ActionResult ChangeAddress()
+        {
+            return View("ChangeAddress");
+        }
+
+        [HttpPost]
+        public ActionResult ChangeAddress(string address)
+        {
+            string userId = User.Identity.GetUserId();
+            ApplicationUser user = db.Users.Where(u => u.Id == userId).FirstOrDefault();
+            user.Address = address;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
 #region Helpers

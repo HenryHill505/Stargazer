@@ -14,6 +14,7 @@ namespace Stargazer.Models
         public bool BrowserRemembered { get; set; }
         public List<Event> events { get; set; }
         public string Address { get; set; }
+        public string UserId { get; set; }
     }
 
     public class ManageLoginsViewModel

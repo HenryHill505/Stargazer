@@ -24,7 +24,19 @@
             }
             ]
         </dd>
+        <dt>Address:</dt>
+        <dd>
+            @if (Model.Address != null)
+            {
+                @Model.Address
+            }
+            else
+            {
+                <p>No address found</p>
+            }
 
+            @Html.ActionLink("Change Address", "ChangeAddress")
+        </dd>
 
         <dt>Your Upcoming Events</dt>
         <dd>

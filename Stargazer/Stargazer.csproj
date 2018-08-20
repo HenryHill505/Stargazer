@@ -293,6 +293,7 @@
     <Content Include="Views\Details\_Map.cshtml" />
     <Content Include="Views\Details\_CreateEvent.cshtml" />
     <Content Include="Views\Home\EventDetails.cshtml" />
+    <Content Include="Views\Manage\ChangeAddress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
