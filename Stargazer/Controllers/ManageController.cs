@@ -72,6 +72,7 @@ namespace Stargazer.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Address = db.Users.Where(e => e.Id == userId).Select(e => e.Address).FirstOrDefault(),
                 events = db.Events.Where(e => e.UserId == userId).Where(e => e.Date > DateTime.Today).ToList()
             };
             return View(model);
