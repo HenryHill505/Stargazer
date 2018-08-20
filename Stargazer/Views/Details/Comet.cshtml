@@ -1,15 +1,16 @@
 ﻿@using Microsoft.AspNet.Identity
-@model Comet
+@using Stargazer.Models
+@model CosmicBodyViewModel
 @{
     ViewBag.Title = "View";
 }
 
 @Html.Hidden("UserId", User.Identity.GetUserId(), new { id = "user-id" })
-@Html.Hidden("BodyName", Model.name, new { id = "body-name" })
+@Html.Hidden("BodyName", Model.body.name, new { id = "body-name" })
 
-<h2>@Model.name</h2>
+<h2>@Model.body.name</h2>
 
-<h2>@Model.magnitude</h2>
+<h2>@Model.body.magnitude</h2>
 
 <label>
     Latitude
@@ -29,25 +30,35 @@
 
 </div>
 
-<button id="event-button">Event</button>
+<table>
+    <tr>
+        @foreach (Event newEvent in Model.events)
+        {
+            <td>@Html.ActionLink(newEvent.Date.ToString(), "EventDetails", new { Id = newEvent.Id })</td>
+        }
+    </tr>
+</table>
 
-<div id="event-box">
+    <button id="event-button">Event</button>
 
-</div>
 
-<script src="/Scripts/jquery-3.3.1.js"></script>
-<script>
-    $("document").ready(function () {
-        $("#map-button").click(function () {
-            let latitude = $("#latitude").val();
-            let longitude = $("#longitude").val();
-            let urlString = "/Details/Map?latitude=" + latitude + "&longitude=" + longitude + "&magnitude=1";
-            $("#map-box").load(urlString);
+    <div id="event-box">
 
+    </div>
+
+    <script src="/Scripts/jquery-3.3.1.js"></script>
+    <script>
+        $("document").ready(function () {
+            $("#map-button").click(function () {
+                let latitude = $("#latitude").val();
+                let longitude = $("#longitude").val();
+                let urlString = "/Details/Map?latitude=" + latitude + "&longitude=" + longitude + "&magnitude=1";
+                $("#map-box").load(urlString);
+
+            })
+            $("#event-button").click(function () {
+                $("#event-box").load("/Details/GetEventPartial");
+            })
         })
-        $("#event-button").click(function () {
-            $("#event-box").load("/Details/GetEventPartial");
-        })
-    })
-</script>
+    </script>
 

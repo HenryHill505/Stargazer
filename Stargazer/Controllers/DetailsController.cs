@@ -69,8 +69,10 @@ namespace Stargazer.Controllers
         private ActionResult GetCometDetails(string identifier)
         {
             Comet comet = RequestManager.GetCometDetails(identifier);
+            List<Event> events = db.Events.Where(e => e.CosmicBody == comet.name).Where(e => e.Date > DateTime.Today).ToList();
+            CosmicBodyViewModel viewModel = new CosmicBodyViewModel() { body = comet, events = events };
             
-            return View("Comet", comet);
+            return View("Comet", viewModel);
         }
     }
 }
