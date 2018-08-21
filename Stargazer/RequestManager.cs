@@ -10,6 +10,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Linq;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
 
 namespace Stargazer
 {
@@ -188,6 +191,19 @@ namespace Stargazer
             var result = new { description = description, clouds = clouds};
 
             return result;
+        }
+
+        public static void SendSmsAlert(string messageContent)
+        {
+            string accountSid = Keyring.TwilioSID;
+            string authToken = Keyring.TwilioAuthToken;
+            TwilioClient.Init(accountSid, authToken);
+
+            var to = new PhoneNumber("+19014898164");
+            var message = MessageResource.Create(
+                to,
+                from: new PhoneNumber("+19013905586"),
+                body: messageContent);
         }
     }
 }
