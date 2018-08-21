@@ -88,13 +88,18 @@ namespace Stargazer.Controllers
             return View("Comet", viewModel);
         }
 
+        public ActionResult PictureUpload()
+        {
+            return View("PictureUpload");
+        }
+
         [HttpPost]
         public ActionResult UploadPicture(HttpPostedFileBase file, string cosmicBody)
         {
             if (file.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                var path = Path.Combine(Server.MapPath("~/App_Data/"), fileName);
                 file.SaveAs(path);
             }
 
