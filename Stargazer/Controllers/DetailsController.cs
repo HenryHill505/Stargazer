@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Stargazer.Models;
 using Microsoft.AspNet.Identity;
+using System.IO;
 
 namespace Stargazer.Controllers
 {
@@ -85,6 +86,19 @@ namespace Stargazer.Controllers
             viewModel.userAddress = db.Users.Where(u => u.Id == userId).Select(u => u.Address).FirstOrDefault();
             
             return View("Comet", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult UploadPicture(HttpPostedFileBase file, string cosmicBody)
+        {
+            if (file.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                file.SaveAs(path);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
