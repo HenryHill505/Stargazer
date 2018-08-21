@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201808211506230_ChangedPictureModel.Designer.cs">
       <DependentUpon>201808211506230_ChangedPictureModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808212107251_Reminders.cs" />
+    <Compile Include="Migrations\201808212107251_Reminders.Designer.cs">
+      <DependentUpon>201808212107251_Reminders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CosmicBodyViewModel.cs" />
@@ -355,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808211506230_ChangedPictureModel.resx">
       <DependentUpon>201808211506230_ChangedPictureModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808212107251_Reminders.resx">
+      <DependentUpon>201808212107251_Reminders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

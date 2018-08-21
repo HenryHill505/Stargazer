@@ -10,6 +10,8 @@ namespace Stargazer.Models
     public class ApplicationUser : IdentityUser
     {
         public string Address{ get; set; }
+        public bool GetReminders { get; set; }
+        public int ReminderTime { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
