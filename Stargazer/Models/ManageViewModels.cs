@@ -88,4 +88,10 @@ namespace Stargazer.Models
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
+
+    public class TextReminderViewModel
+    {
+        public bool GetReminders { get; set; }
+        public int ReminderTime { get; set; }
+    }
 }
