@@ -222,6 +222,10 @@
     <Compile Include="Migrations\201808202131049_PictureModels.Designer.cs">
       <DependentUpon>201808202131049_PictureModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808211506230_ChangedPictureModel.cs" />
+    <Compile Include="Migrations\201808211506230_ChangedPictureModel.Designer.cs">
+      <DependentUpon>201808211506230_ChangedPictureModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CosmicBodyViewModel.cs" />
@@ -334,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808202131049_PictureModels.resx">
       <DependentUpon>201808202131049_PictureModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808211506230_ChangedPictureModel.resx">
+      <DependentUpon>201808211506230_ChangedPictureModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

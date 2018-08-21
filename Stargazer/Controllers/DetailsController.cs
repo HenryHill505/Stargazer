@@ -101,7 +101,12 @@ namespace Stargazer.Controllers
                 var fileName = Path.GetFileName(file.FileName);
                 var path = Path.Combine(Server.MapPath("~/App_Data/"), fileName);
                 file.SaveAs(path);
+
+                var imageProperties = RequestManager.PostImgur(path);
+                Picture picture = new Picture();
+
             }
+            
 
             return RedirectToAction("Index");
         }

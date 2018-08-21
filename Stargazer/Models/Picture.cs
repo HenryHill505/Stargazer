@@ -12,7 +12,8 @@ namespace Stargazer.Models
         [Key]
         public int Id { get; set; }
         public string BodyName { get; set; }
-        public string ImgurHash { get; set; }
+        public string DeleteHash { get; set; }
+        public string Link { get; set; }
         [ForeignKey("User")]
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
