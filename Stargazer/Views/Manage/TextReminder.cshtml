@@ -9,7 +9,7 @@
 @Model.GetReminders
 @Model.ReminderTime
 
-@using (Html.BeginForm("ChangeTextReminder","ManageController",FormMethod.Post))
+@using (Html.BeginForm("ChangeTextReminder","Manage",FormMethod.Post))
 {
     @Html.RadioButtonFor(m => m.GetReminders, true)
     @Html.RadioButtonFor(m => m.GetReminders, false)
