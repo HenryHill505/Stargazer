@@ -366,6 +366,17 @@ namespace Stargazer.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult TextReminder()
+        {
+            TextReminderViewModel model = new TextReminderViewModel();
+            string userId = User.Identity.GetUserId();
+            model.GetReminders = db.Users.Where(u => u.Id == userId).Select(u => u.GetReminders).FirstOrDefault();
+            model.ReminderTime = db.Users.Where(u => u.Id == userId).Select(u => u.ReminderTime).FirstOrDefault();
+            return View(model);
+        }
+
+        
+
 #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
