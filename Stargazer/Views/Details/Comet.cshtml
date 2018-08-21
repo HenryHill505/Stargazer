@@ -4,6 +4,8 @@
 @{
     ViewBag.Title = "View";
 }
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 
 @Html.Hidden("UserId", User.Identity.GetUserId(), new { id = "user-id" })
 @Html.Hidden("BodyName", Model.body.name, new { id = "body-name" })
@@ -62,11 +64,19 @@ else
 
 </div>
 
+
+@Ajax.ActionLink("Show pictures", "GetPictures", new { bodyName = Model.body.name }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "picture-box", InsertionMode = InsertionMode.Replace })
+@Html.ActionLink("Add Pictures", "PictureUpload", new { bodyName =  Model.body.name})
+
+<div id="picture-box">
+
+</div>
+
 <script src="/Scripts/jquery-3.3.1.js"></script>
 <script>
     $("document").ready(function () {
         $("#map-button").click(function () {
-            let latitude = $("#latitude").val();,.
+            let latitude = $("#latitude").val();
             let longitude = $("#longitude").val();
             let address = $("#address").val();
             for (i = 0; i < 10; i++) {

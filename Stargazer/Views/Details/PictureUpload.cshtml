@@ -1,9 +1,9 @@
-﻿
+﻿@model List<string>
 @{
     ViewBag.Title = "PictureUpload";
 }
 
 <h2>PictureUpload</h2>
 
-@Html.Partial("_UploadPicture")
+@Html.Partial("_UploadPicture",Model[0])
 

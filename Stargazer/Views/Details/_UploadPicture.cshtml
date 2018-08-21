@@ -1,8 +1,10 @@
-﻿<form action="/Details/UploadPicture" method="post" enctype="multipart/form-data">
+﻿@model string
+
+<form action="/Details/UploadPicture" method="post" enctype="multipart/form-data">
 
     <label for="file">Filename:</label>
     <input type="file" name="file" id="file" />
-    @Html.Hidden("cosmicBody", "381989 (2010 HR80)")
+    @Html.Hidden("cosmicBody", Model)
 
     <input type="submit" />
 </form>

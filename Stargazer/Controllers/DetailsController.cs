@@ -88,15 +88,18 @@ namespace Stargazer.Controllers
             return View("Comet", viewModel);
         }
 
+        [HttpGet]
         public ActionResult GetPictures(string bodyName)
         {
             List<Picture> pictures = db.Pictures.Where(p => p.BodyName == bodyName).ToList();
             return PartialView("_Pictures", pictures);
         }
 
-        public ActionResult PictureUpload()
+        public ActionResult PictureUpload(string bodyName)
         {
-            return View("PictureUpload");
+            List<string> test = new List<string>();
+            test.Add(bodyName);
+            return View("PictureUpload", test);
         }
 
         [HttpPost]

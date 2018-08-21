@@ -133,8 +133,8 @@ namespace Stargazer
                 JObject json = JObject.Parse(result);
                 string deleteHash = (string)json["data"]["deletehash"];
                 string imageUrl = (string)json["data"]["link"];
-                imageUrl = imageUrl.Remove(0, 19);
-                imageUrl = "https://api.imgur.com/3/image" + imageUrl;
+                //imageUrl = imageUrl.Remove(0, 19);
+                //imageUrl = "https://api.imgur.com/3/image" + imageUrl;
 
                 imageProperties.Add("imageUrl", imageUrl);
                 imageProperties.Add("deleteHash", deleteHash);
