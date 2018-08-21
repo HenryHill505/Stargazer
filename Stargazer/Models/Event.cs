@@ -17,5 +17,6 @@ namespace Stargazer.Models
         public DateTime Date { get; set; }
         public string Location { get; set; }
         public string CosmicBody { get; set; }
+        public bool ReminderSent { get; set; }
     }
 }

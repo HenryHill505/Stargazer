@@ -193,13 +193,13 @@ namespace Stargazer
             return result;
         }
 
-        public static void SendSmsAlert(string messageContent)
+        public static void SendSmsAlert(string messageContent, string toNumber)
         {
             string accountSid = Keyring.TwilioSID;
             string authToken = Keyring.TwilioAuthToken;
             TwilioClient.Init(accountSid, authToken);
 
-            var to = new PhoneNumber("+19014898164");
+            var to = new PhoneNumber(toNumber);
             var message = MessageResource.Create(
                 to,
                 from: new PhoneNumber("+19013905586"),
