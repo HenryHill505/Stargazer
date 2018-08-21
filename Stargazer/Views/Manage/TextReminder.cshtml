@@ -15,6 +15,10 @@
     @Html.RadioButtonFor(m => m.GetReminders, false)
 
     @Html.DropDownListFor(m => m.ReminderTime, new SelectList( new List<int>(){1, 2, 3, 4, 5, 6, 7} ))
+
+   <formgroup>
+       <button type="submit">Submit Change</button>
+   </formgroup>
 }
 
 
