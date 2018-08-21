@@ -2,10 +2,14 @@
 using Stargazer.Controllers;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Xml.Linq;
 
 namespace Stargazer
 {
@@ -109,6 +113,31 @@ namespace Stargazer
 
             string imageUrl = (string)json["data"]["link"];
             return imageUrl;
+        }
+
+        public static Object PostImgur(string imagePath)
+        {
+            string url = "https://api.imgur.com/3/upload.json";
+
+            using (var client = new WebClient())
+            {
+                client.Headers.Add("Authorization", "Client-ID " + Keyring.ImgurClientId);
+                var values = new NameValueCollection
+                {
+                    {"key", Keyring.ImgurClientId },
+                    {"image", Convert.ToBase64String(File.ReadAllBytes(imagePath)) }
+                };
+
+                var response = client.UploadValues(url, values);
+                string result = System.Text.Encoding.UTF8.GetString(response);
+                JObject json = JObject.Parse(result);
+                string imageUrl = (string)json["data"]["link"];
+                string deletehash = (string)json["data"]["deletehash"];
+
+                var imageProperties = new { imageUrl, deletehash };
+                return imageProperties;
+            }
+
         }
 
         public static List<LightPoint> GetLightPollutionData(double latitude, double longitude, double distance, double magnitude)
