@@ -9,7 +9,6 @@ namespace Stargazer
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            RequestManager.SendSmsAlert();
         }
     }
 }

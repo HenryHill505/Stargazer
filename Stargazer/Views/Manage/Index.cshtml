@@ -28,7 +28,7 @@
         <dd>
             @if (Model.Address != null)
             {
-                @Model.Address
+                <p>@Model.Address</p>
             }
             else
             {
@@ -36,6 +36,18 @@
             }
 
             @Html.ActionLink("Change Address", "ChangeAddress")
+        </dd>
+        <dt>Phone Number:</dt>
+        <dd>
+            @if (Model.PhoneNumber != null)
+            {
+                <p>@Model.PhoneNumber</p>
+            }
+            else
+            {
+                <p>No phone number found</p>
+            }
+            @Html.ActionLink("Change Phone Number", "AddPhoneNumber")
         </dd>
 
         <dt>Your Upcoming Events</dt>
