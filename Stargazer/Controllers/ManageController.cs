@@ -375,6 +375,17 @@ namespace Stargazer.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult ChangeTextReminder(bool getReminders, int ReminderTime)
+        {
+            string userId = User.Identity.GetUserId();
+            ApplicationUser user = db.Users.Where(u => u.Id == userId).FirstOrDefault();
+            user.GetReminders = getReminders;
+            user.ReminderTime = ReminderTime;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         
 
 #region Helpers

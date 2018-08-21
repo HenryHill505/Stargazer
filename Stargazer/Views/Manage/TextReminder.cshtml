@@ -6,5 +6,15 @@
 
 <h2>TextReminder</h2>
 
+@Model.GetReminders
+@Model.ReminderTime
+
+@using (Html.BeginForm("ChangeTextReminder","ManageController",FormMethod.Post))
+{
+    @Html.RadioButtonFor(m => m.GetReminders, true)
+    @Html.RadioButtonFor(m => m.GetReminders, false)
+
+    @Html.DropDownListFor(m => m.ReminderTime, new SelectList( new List<int>(){1, 2, 3, 4, 5, 6, 7} ))
+}
 
 
