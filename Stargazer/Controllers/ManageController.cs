@@ -74,6 +74,8 @@ namespace Stargazer.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
                 Address = db.Users.Where(e => e.Id == userId).Select(e => e.Address).FirstOrDefault(),
                 events = db.Events.Where(e => e.UserId == userId).Where(e => e.Date > DateTime.Today).ToList(),
+                GetReminders = db.Users.Where(e => e.Id == userId).Select(e => e.GetReminders).FirstOrDefault(),
+                ReminderTime = db.Users.Where(e => e.Id == userId).Select(e => e.ReminderTime).FirstOrDefault(),
                 UserId = userId
             };
             return View(model);
