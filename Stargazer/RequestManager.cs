@@ -115,10 +115,10 @@ namespace Stargazer
             return imageUrl;
         }
 
-        public static Object PostImgur(string imagePath)
+        public static Dictionary<string, string> PostImgur(string imagePath)
         {
             string url = "https://api.imgur.com/3/upload.json";
-
+            Dictionary<string, string> imageProperties = new Dictionary<string, string>();
             using (var client = new WebClient())
             {
                 client.Headers.Add("Authorization", "Client-ID " + Keyring.ImgurClientId);
@@ -131,10 +131,15 @@ namespace Stargazer
                 var response = client.UploadValues(url, values);
                 string result = System.Text.Encoding.UTF8.GetString(response);
                 JObject json = JObject.Parse(result);
+                string deleteHash = (string)json["data"]["deletehash"];
                 string imageUrl = (string)json["data"]["link"];
-                string deletehash = (string)json["data"]["deletehash"];
+                imageUrl = imageUrl.Remove(0, 19);
+                imageUrl = "https://api.imgur.com/3/image" + imageUrl;
 
-                var imageProperties = new { imageUrl, deletehash };
+                imageProperties.Add("imageUrl", imageUrl);
+                imageProperties.Add("deleteHash", deleteHash);
+
+                //var imageProperties = new { imageUrl, deletehash };
                 return imageProperties;
             }
 

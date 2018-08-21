@@ -88,6 +88,12 @@ namespace Stargazer.Controllers
             return View("Comet", viewModel);
         }
 
+        public ActionResult GetPictures(string bodyName)
+        {
+            List<Picture> pictures = db.Pictures.Where(p => p.BodyName == bodyName).ToList();
+            return PartialView("_Pictures", pictures);
+        }
+
         public ActionResult PictureUpload()
         {
             return View("PictureUpload");
@@ -103,12 +109,12 @@ namespace Stargazer.Controllers
                 file.SaveAs(path);
 
                 var imageProperties = RequestManager.PostImgur(path);
-                Picture picture = new Picture();
-
+                Picture picture = new Picture() { DeleteHash = imageProperties["deleteHash"], Link = imageProperties["imageUrl"], BodyName = cosmicBody, UserId = User.Identity.GetUserId() };
+                db.Pictures.Add(picture);
+                db.SaveChanges();
             }
             
-
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
