@@ -193,11 +193,13 @@ namespace Stargazer
             return result;
         }
 
-        public static void SendSmsAlert(string messageContent, string toNumber)
+        public static void SendSmsAlert(string bodyName, string location, DateTime date, string toNumber)
         {
             string accountSid = Keyring.TwilioSID;
             string authToken = Keyring.TwilioAuthToken;
             TwilioClient.Init(accountSid, authToken);
+
+            string messageContent = $"REMINDER: You've made an event to view {bodyName} at {location} on {date}"; 
 
             var to = new PhoneNumber(toNumber);
             var message = MessageResource.Create(
