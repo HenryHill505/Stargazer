@@ -11,7 +11,6 @@ namespace Stargazer
             ConfigureAuth(app);
             ReminderManager.SendReminders();
 
-            string Month = StarCalculator.GetPeakVisibilityMonth(18.61);
         }
     }
 }

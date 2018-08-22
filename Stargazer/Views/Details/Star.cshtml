@@ -23,7 +23,7 @@
     <dt>Right Ascension</dt>
     <dd>@Model.body.rightAscension</dd>
     <dt>Peak visibility</dt>
-    <dd></dd>
+    <dd>@StarCalculator.GetPeakVisibilityMonth(@Model.body.rightAscension)</dd>
 </dl>
 
 @*<label>
@@ -53,6 +53,14 @@ else
 
 
 <button id="map-button">Map</button>
+<div>
+    <input type="radio" class="map-priority" name="map-priority" value="nearness" checked="checked" />
+    <span>Nearness</span>
+</div>
+<div>
+    <input type="radio" class="map-priority" name="map-priority" value="view" />
+    <span>View</span>
+</div>
 @*@Ajax.ActionLink("Map", "Map", new { latitude = 43.033580, longitude = -87.911910, magnitude = 1 }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "map-box", InsertionMode = InsertionMode.Replace })*@
 
 
@@ -92,12 +100,13 @@ else
             //let longitude = $("#longitude").val();
             let address = $("#address").val();
             let magnitude = $("#magnitude").val();
-            let declination = $("#declination").val()
+            let declination = $("#declination").val();
+            let priority = $(".map-priority:checked").val();
             for (i = 0; i < 10; i++) {
                 address = address.replace(' ', "%20");
             }
             //let urlString = "/Details/Map?latitude=" + latitude + "&longitude=" + longitude + "&magnitude=1";
-            let urlString = "/Details/MapStar?address=" + address + "&magnitude=" + magnitude +"&declination=" + declination;
+            let urlString = "/Details/MapStar?address=" + address + "&magnitude=" + magnitude + "&declination=" + declination + "&priority=" + priority;
             $("#map-box").load(urlString);
 
         })

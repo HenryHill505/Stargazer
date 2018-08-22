@@ -81,9 +81,11 @@ namespace Stargazer.Controllers
             return PartialView("_Map", viewingPlaces);
         }
 
-        public ActionResult MapStar(string address, double magnitude, double declination)
+        public ActionResult MapStar(string address, double magnitude, double declination, string priority)
         {
             Dictionary<string, double> coordinates = RequestManager.GeocodeAddress(address);
+
+            if(priority == "view") { coordinates["latitude"] = declination; }
 
             if (!StarCalculator.isStarVisible(coordinates["latitude"], declination))
             {

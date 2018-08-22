@@ -49,13 +49,9 @@ namespace Stargazer
                 rightAscension = Math.Ceiling(rightAscension);
             }
 
-            //double monthsFromEquinox = (12 - Math.Round(rightAscension))/2;
             int monthsToWorstMonth = (int)rightAscension / 2;
             DateTime worstMonth = vernalEquinox.AddMonths(monthsToWorstMonth);
             DateTime bestMonth = worstMonth.AddMonths(6);
-            //vernal equinox +monthsfromequinox
-            //double mostVisibleDate = vernalEquinox.Month - monthsFromEquinox;
-            //int mostVisibleMonth = (int)Math.Round(mostVisibleDate);
             return CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(bestMonth.Month);
 
         }
