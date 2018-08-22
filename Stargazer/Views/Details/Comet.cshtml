@@ -83,7 +83,7 @@ else
                 address = address.replace(' ', "%20");
             }
             //let urlString = "/Details/Map?latitude=" + latitude + "&longitude=" + longitude + "&magnitude=1";
-            let urlString = "/Details/Map?address=" + address + "&magnitude=1";
+            let urlString = "/Details/MapComet?address=" + address + "&magnitude=1";
             $("#map-box").load(urlString);
 
         })

@@ -73,7 +73,7 @@ namespace Stargazer.Controllers
         //    return PartialView("_Map", viewingPlaces);
         //}
 
-        public ActionResult Map(string address, double magnitude)
+        public ActionResult MapComet(string address, double magnitude)
         {
             Dictionary<string, double> coordinates = RequestManager.GeocodeAddress(address);
             List<ViewingPlace> viewingPlaces = GetViewingPlaces(coordinates["latitude"], coordinates["longitude"], magnitude);

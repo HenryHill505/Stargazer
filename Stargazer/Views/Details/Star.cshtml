@@ -11,7 +11,7 @@
 @Html.Hidden("BodyName", Model.body.name, new { id = "body-name" })
 @Html.Hidden("Magnitude", Model.body.name, new { id = "magnitude" })
 @Html.Hidden("Declination", Model.body.declination, new { id = "declination" })
-@Html.Hidden("Declination", Model.body.rightAscension, new { id = "right-ascension" })
+@Html.Hidden("RightAscension", Model.body.rightAscension, new { id = "right-ascension" })
 
 <h2>@Model.body.name</h2>
 
@@ -82,12 +82,13 @@ else
             //let latitude = $("#latitude").val();
             //let longitude = $("#longitude").val();
             let address = $("#address").val();
-            let magnitude = $("#magnitued");
+            let magnitude = $("#magnitude").val();
+            let declination = $("#declination").val()
             for (i = 0; i < 10; i++) {
                 address = address.replace(' ', "%20");
             }
             //let urlString = "/Details/Map?latitude=" + latitude + "&longitude=" + longitude + "&magnitude=1";
-            let urlString = "/Details/Map?address=" + address + "&magnitude=1";
+            let urlString = "/Details/MapStar?address=" + address + "&magnitude=" + magnitude +"&declination=" + declination;
             $("#map-box").load(urlString);
 
         })
