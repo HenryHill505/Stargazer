@@ -16,7 +16,7 @@ namespace Stargazer.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("HomePage");
         }
 
         public ActionResult About()
