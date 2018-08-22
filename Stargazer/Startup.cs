@@ -9,7 +9,7 @@ namespace Stargazer
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            //ReminderManager.SendReminders();
+            ReminderManager.SendReminders();
         }
     }
 }

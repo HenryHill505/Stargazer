@@ -20,8 +20,10 @@ namespace Stargazer
                 if(daysToGo.Days < selectedEvent.User.ReminderTime)
                 {
                     RequestManager.SendSmsAlert(selectedEvent.CosmicBody, selectedEvent.Location, selectedEvent.Date ,selectedEvent.User.PhoneNumber);
+                    selectedEvent.ReminderSent = true;
                 }
             }
+            db.SaveChanges();
 
         }
     }

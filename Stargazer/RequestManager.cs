@@ -180,6 +180,14 @@ namespace Stargazer
             return places;
         }
 
+        public static void GetStars()
+        {
+            Li
+            string url = "http://www.astropical.space/astrodb/api.php?table=stars&format=json";
+            JObject json = GetJsonObject(url).Result;
+
+        }
+
         public static Object GetWeatherForecast(double latitude, double longitude)
         {
             
