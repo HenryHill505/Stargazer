@@ -1,0 +1,10 @@
+﻿@model List<Star>
+
+<table>
+    @foreach (Star star in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink(@star.name, "GetDetails", "Details", new { identifier = star.name, type = "star" }, new { })</td>
+        </tr>
+    }
+</table>
