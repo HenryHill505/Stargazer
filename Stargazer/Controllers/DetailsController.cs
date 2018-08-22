@@ -18,15 +18,44 @@ namespace Stargazer.Controllers
             return View();
         }
 
-        public ActionResult GetDetails(string identifier, string type)
+        //public ActionResult GetDetails(string identifier, string type)
+        //{
+        //    switch (type)
+        //    {
+        //        case "comet":
+        //            return GetCometDetails(identifier);
+        //        default:
+        //            return Index();
+        //    }
+        //}
+
+        public ActionResult GetDetails(string identifier, string type, CosmicBody cosmicBody)
         {
             switch (type)
             {
                 case "comet":
                     return GetCometDetails(identifier);
+                case "star":
+                    return GetStarDetails(cosmicBody);
                 default:
                     return Index();
             }
+        }
+
+        public ActionResult GetStarDetails(CosmicBody star)
+        {
+            CosmicBodyViewModel viewModel = GetCosmicBodyViewModel(star);
+            return View("Star", star);
+        }
+
+        public CosmicBodyViewModel GetCosmicBodyViewModel(CosmicBody body)
+        {
+            List<Event> events = db.Events.Where(e => e.CosmicBody == body.name).Where(e => e.Date > DateTime.Today).ToList();
+            CosmicBodyViewModel viewModel = new CosmicBodyViewModel() { body = body, events = events };
+
+            string userId = User.Identity.GetUserId();
+            viewModel.userAddress = db.Users.Where(u => u.Id == userId).Select(u => u.Address).FirstOrDefault();
+            return viewModel;
         }
 
         public List<ViewingPlace> GetViewingPlaces(double latitude, double longitude, double magnitude)

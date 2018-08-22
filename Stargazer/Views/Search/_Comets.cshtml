@@ -4,7 +4,7 @@
     @foreach (Comet comet in Model)
     {
         <tr>
-            <td>@Html.ActionLink(@comet.name,"GetDetails","Details",new {identifier = comet.name, type = "comet"}, new { })</td>
+            <td>@Html.ActionLink(@comet.name,"GetDetails","Details",new {identifier = comet.name, type = "comet", chosenBody = comet}, new { })</td>
         </tr>
     }
 </table>
