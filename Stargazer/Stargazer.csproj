@@ -258,6 +258,7 @@
     <Compile Include="ReminderManager.cs" />
     <Compile Include="RequestManager.cs" />
     <Compile Include="Star.cs" />
+    <Compile Include="StarCalculator.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewingPlace.cs" />
   </ItemGroup>

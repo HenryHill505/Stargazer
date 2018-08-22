@@ -84,6 +84,11 @@ namespace Stargazer.Controllers
         public ActionResult MapStar(string address, double magnitude, double declination)
         {
             Dictionary<string, double> coordinates = RequestManager.GeocodeAddress(address);
+
+            if (!StarCalculator.isStarVisible(coordinates["latitude"], declination))
+            {
+                coordinates["latitude"] = StarCalculator.getVisibleLatitude(coordinates["latitude"], declination);
+            }
             List<ViewingPlace> viewingPlaces = GetViewingPlaces(coordinates["latitude"], coordinates["longitude"], magnitude);
             ViewBag.GoogleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + Keyring.GoogleMapsKey + "&callback=initMap";
             return PartialView("_Map", viewingPlaces);
