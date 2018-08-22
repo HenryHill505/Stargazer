@@ -56,5 +56,13 @@ namespace Stargazer.Controllers
             db.SaveChanges();
             return "success";
         }
+
+        public ActionResult DeleteEvent(int id)
+        {
+            Event selectedEvent = db.Events.Where(e => e.Id == id).FirstOrDefault();
+            db.Events.Remove(selectedEvent);
+            db.SaveChanges();
+            return RedirectToAction("HomePage");
+        }
     }
 }
