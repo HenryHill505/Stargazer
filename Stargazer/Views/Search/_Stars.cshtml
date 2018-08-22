@@ -4,7 +4,7 @@
     @foreach (Star star in Model)
     {
         <tr>
-            <td>@Html.ActionLink(@star.name, "GetDetails", "Details", new { identifier = star.name, type = "star", chosenBody = star }, new { })</td>
+            <td>@Html.ActionLink(@star.name, "GetStarDetails", "Details", new { name = star.name, magnitude = star.magnitude, declination = star.declination, rightAscension = star.rightAscension }, new { })</td>
         </tr>
     }
 </table>

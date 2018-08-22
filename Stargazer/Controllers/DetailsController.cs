@@ -35,15 +35,16 @@ namespace Stargazer.Controllers
             {
                 case "comet":
                     return GetCometDetails(identifier);
-                case "star":
-                    return GetStarDetails(cosmicBody);
+                //case "star":
+                //    return GetStarDetails(cosmicBody);
                 default:
                     return Index();
             }
         }
 
-        public ActionResult GetStarDetails(CosmicBody star)
+        public ActionResult GetStarDetails(string name, double magnitude, double declination, double rightAscension)
         {
+            Star star = new Star() { name = name, magnitude = magnitude, declination = declination, rightAscension = rightAscension };
             CosmicBodyViewModel viewModel = GetCosmicBodyViewModel(star);
             return View("Star", viewModel);
         }
