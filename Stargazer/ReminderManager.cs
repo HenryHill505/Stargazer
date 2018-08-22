@@ -12,7 +12,7 @@ namespace Stargazer
 
         public static void SendReminders()
         {
-            List<Event> events = db.Events.Include("User").Where(e => e.Date > DateTime.Today).Where(e => e.ReminderSent == false).Where(e => e.User.GetReminders == true).ToList();
+            List<Event> events = db.Events.Include("User").Where(e => e.Date > DateTime.Today).Where(e => e.ReminderSent == false).Where(e => e.User.GetReminders == true).Where(e => e.User.PhoneNumber != null).ToList();
             
             foreach(Event selectedEvent in events)
             {
