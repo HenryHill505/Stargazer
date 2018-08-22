@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +8,7 @@ namespace Stargazer
 {
     public static class StarCalculator
     {
+        private static DateTime vernalEquinox = DateTime.Parse("March 21");
         public static bool isStarVisible(double userLatitude, double starDeclination)
         {
             double result;
@@ -34,6 +36,28 @@ namespace Stargazer
             {
                 return (-starDeclination + 90) * -1;
             }
+        }
+
+        public static string GetPeakVisibilityMonth(double rightAscension)
+        {
+            if (Math.Floor(rightAscension)%2 == 0)
+            {
+                rightAscension = Math.Floor(rightAscension);
+            }
+            else
+            {
+                rightAscension = Math.Ceiling(rightAscension);
+            }
+
+            //double monthsFromEquinox = (12 - Math.Round(rightAscension))/2;
+            int monthsToWorstMonth = (int)rightAscension / 2;
+            DateTime worstMonth = vernalEquinox.AddMonths(monthsToWorstMonth);
+            DateTime bestMonth = worstMonth.AddMonths(6);
+            //vernal equinox +monthsfromequinox
+            //double mostVisibleDate = vernalEquinox.Month - monthsFromEquinox;
+            //int mostVisibleMonth = (int)Math.Round(mostVisibleDate);
+            return CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(bestMonth.Month);
+
         }
 
     }
