@@ -5,13 +5,12 @@
 
 <h2>Search</h2>
 
-<button id="comet-button">
-    Comets
-</button>
 
-@Ajax.ActionLink("Comets", "GetComets", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "comets", InsertionMode = InsertionMode.Replace })
 
-<div id="comets">
+@Ajax.ActionLink("Comets", "GetComets", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "results-box", InsertionMode = InsertionMode.Replace })
+@Ajax.ActionLink("Stars", "GetStars", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "results-box", InsertionMode = InsertionMode.Replace })
+
+<div id="results-box">
 
 </div>
 
