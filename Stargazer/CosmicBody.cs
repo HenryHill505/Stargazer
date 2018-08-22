@@ -9,5 +9,7 @@ namespace Stargazer
     {
         public double magnitude;
         public string name;
+        public double declination;
+        public double rightAscension;
     }
 }

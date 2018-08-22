@@ -7,7 +7,6 @@ namespace Stargazer
 {
     public class Star : CosmicBody
     {
-        public double declination;
-        public double rightAscension;
+
     }
 }

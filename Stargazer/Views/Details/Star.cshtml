@@ -9,20 +9,23 @@
 
 @Html.Hidden("UserId", User.Identity.GetUserId(), new { id = "user-id" })
 @Html.Hidden("BodyName", Model.body.name, new { id = "body-name" })
+@Html.Hidden("Magnitude", Model.body.name, new { id = "magnitude" })
+@Html.Hidden("Declination", Model.body.declination, new { id = "declination" })
+@Html.Hidden("Declination", Model.body.rightAscension, new { id = "right-ascension" })
 
 <h2>@Model.body.name</h2>
 
 <h2>@Model.body.magnitude</h2>
 
-<label>
-    Latitude
-    <input id="latitude" type="text" value="43.033580" />
-</label>
+@*<label>
+        Latitude
+        <input id="latitude" type="text" value="43.033580" />
+    </label>*@
 
-<label>
-    Longitude
-    <input id="longitude" type="text" value="-87.911910" />
-</label>
+@*<label>
+        Longitude
+        <input id="longitude" type="text" value="-87.911910" />
+    </label>*@
 
 @if (User.Identity.IsAuthenticated && Model.userAddress != null)
 {
@@ -76,9 +79,10 @@ else
 <script>
     $("document").ready(function () {
         $("#map-button").click(function () {
-            let latitude = $("#latitude").val();
-            let longitude = $("#longitude").val();
+            //let latitude = $("#latitude").val();
+            //let longitude = $("#longitude").val();
             let address = $("#address").val();
+            let magnitude = $("#magnitued");
             for (i = 0; i < 10; i++) {
                 address = address.replace(' ', "%20");
             }

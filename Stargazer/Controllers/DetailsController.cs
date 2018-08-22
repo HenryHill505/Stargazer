@@ -81,6 +81,14 @@ namespace Stargazer.Controllers
             return PartialView("_Map", viewingPlaces);
         }
 
+        public ActionResult MapStar(string address, double magnitude, double declination)
+        {
+            Dictionary<string, double> coordinates = RequestManager.GeocodeAddress(address);
+            List<ViewingPlace> viewingPlaces = GetViewingPlaces(coordinates["latitude"], coordinates["longitude"], magnitude);
+            ViewBag.GoogleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + Keyring.GoogleMapsKey + "&callback=initMap";
+            return PartialView("_Map", viewingPlaces);
+        }
+
         public ActionResult GetEventPartial()
         {
             return PartialView("_CreateEvent");
