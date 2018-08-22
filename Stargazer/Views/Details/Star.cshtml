@@ -22,6 +22,8 @@
     <dd>@Model.body.declination</dd>
     <dt>Right Ascension</dt>
     <dd>@Model.body.rightAscension</dd>
+    <dt>Viewing Aperatus</dt>
+    <dd>@StarCalculator.GetRequiredMagnification(@Model.body.magnitude)</dd>
     <dt>Peak visibility</dt>
     <dd>@StarCalculator.GetPeakVisibilityMonth(@Model.body.rightAscension)</dd>
 </dl>

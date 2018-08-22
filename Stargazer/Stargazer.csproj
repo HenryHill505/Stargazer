@@ -337,6 +337,8 @@
     <Content Include="Views\Manage\TextReminder.cshtml" />
     <Content Include="Views\Search\_Stars.cshtml" />
     <Content Include="Views\Details\Star.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\_MapError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

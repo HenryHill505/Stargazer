@@ -56,5 +56,21 @@ namespace Stargazer
 
         }
 
+        public static string GetRequiredMagnification(double magnitude)
+        {
+            if (magnitude <= 6)
+            {
+                return "Naked Eye";
+            }
+            if (magnitude <= 8) { return "20mm Telescope"; }
+            if (magnitude <= 9) { return "30mm Telescope"; }
+            if (magnitude <= 10) { return "50mm Telescope"; }
+            if (magnitude <= 11) { return "70mm Telescope"; }
+            if (magnitude <= 12) { return "120mm Telescope"; }
+            if (magnitude <= 13) { return "180mm Telescope"; }
+            return "Go to an observatory";
+
+        }
+
     }
 }

@@ -83,17 +83,24 @@ namespace Stargazer.Controllers
 
         public ActionResult MapStar(string address, double magnitude, double declination, string priority)
         {
-            Dictionary<string, double> coordinates = RequestManager.GeocodeAddress(address);
-
-            if(priority == "view") { coordinates["latitude"] = declination; }
-
-            if (!StarCalculator.isStarVisible(coordinates["latitude"], declination))
+            try
             {
-                coordinates["latitude"] = StarCalculator.getVisibleLatitude(coordinates["latitude"], declination);
+                Dictionary<string, double> coordinates = RequestManager.GeocodeAddress(address);
+
+                if (priority == "view") { coordinates["latitude"] = declination; }
+
+                if (!StarCalculator.isStarVisible(coordinates["latitude"], declination))
+                {
+                    coordinates["latitude"] = StarCalculator.getVisibleLatitude(coordinates["latitude"], declination);
+                }
+                List<ViewingPlace> viewingPlaces = GetViewingPlaces(coordinates["latitude"], coordinates["longitude"], magnitude);
+                ViewBag.GoogleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + Keyring.GoogleMapsKey + "&callback=initMap";
+                return PartialView("_Map", viewingPlaces);
             }
-            List<ViewingPlace> viewingPlaces = GetViewingPlaces(coordinates["latitude"], coordinates["longitude"], magnitude);
-            ViewBag.GoogleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + Keyring.GoogleMapsKey + "&callback=initMap";
-            return PartialView("_Map", viewingPlaces);
+            catch
+            {
+                return PartialView("_MapError","Home");
+            }
         }
 
         public ActionResult GetEventPartial()
