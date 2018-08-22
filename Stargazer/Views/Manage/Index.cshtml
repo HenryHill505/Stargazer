@@ -68,16 +68,23 @@
         
         <dt>Text Reminders</dt>
         <dd>
-            @if (Model.GetReminders)
+            @if (Model.PhoneNumber != null)
             {
-                <p>You will be reminded @Model.ReminderTime days before your event takes place</p>
+                if (Model.GetReminders)
+                {
+                    <p>You will be reminded @Model.ReminderTime days before your event takes place</p>
+                }
+                else
+                {
+                    <p>You do not have text reminders for events enabled</p>
+                }
+
+                @Html.ActionLink("Change reminder settings", "TextReminder")
             }
             else
             {
-                <p>You do not have text reminders for events enabled</p>
+                <p>You must enter a valid phone number to receive text reminders</p>
             }
-
-            @Html.ActionLink("Change reminder settings","TextReminder")
 
         </dd>
 
