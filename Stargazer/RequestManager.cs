@@ -180,12 +180,19 @@ namespace Stargazer
             return places;
         }
 
-        public static void GetStars()
+        public static List<Star> GetStars()
         {
-            Li
+            List<Star> stars = new List<Star>();
             string url = "http://www.astropical.space/astrodb/api.php?table=stars&format=json";
             JObject json = GetJsonObject(url).Result;
+            int starCount = json["hipstars"].Count();
 
+            for(int i = 0; i < starCount; i++)
+            {
+                stars.Add(new Star() { name = (string)json["hipstars"][i]["name"], magnitude = (double)json["hipstars"][i]["mag"], declination = (double)json["hipstars"][i]["de"], rightAscension = (double)json["hipstars"][i]["ra"] });
+            }
+
+            return stars;
         }
 
         public static Object GetWeatherForecast(double latitude, double longitude)
