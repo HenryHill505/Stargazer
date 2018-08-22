@@ -45,7 +45,7 @@ namespace Stargazer.Controllers
         public ActionResult GetStarDetails(CosmicBody star)
         {
             CosmicBodyViewModel viewModel = GetCosmicBodyViewModel(star);
-            return View("Star", star);
+            return View("Star", viewModel);
         }
 
         public CosmicBodyViewModel GetCosmicBodyViewModel(CosmicBody body)
