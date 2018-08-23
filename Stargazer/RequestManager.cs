@@ -195,13 +195,32 @@ namespace Stargazer
             return stars;
         }
 
-        public static Dictionary<string, string> GetWeatherForecast(double latitude, double longitude)
+        public static Dictionary<string, string> GetWeatherForecast(double latitude, double longitude, string dateString)
         {
             Dictionary<string, string> weatherResults = new Dictionary<string, string>();
             string url = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&APPID=" + Keyring.OpenWeatherKey;
             JObject json = GetJsonObject(url).Result;
-            string description = (string)json["list"][0]["weather"][0]["description"];
-            string clouds = (string)json["list"][0]["clouds"]["all"];
+            int resultCount = json["list"].Count();
+
+            string description;
+            string clouds;
+            
+            for (int i = 0; i < resultCount; i++)
+            {
+                string resultDate = (string)json["list"][i]["dt_txt"];
+                if (resultDate.Contains(dateString) && resultDate.Contains("15:00:00"))
+                {
+                     description = (string)json["list"][i]["weather"][0]["description"];
+                     clouds = (string)json["list"][i]["clouds"]["all"];
+
+                    weatherResults.Add("description", description);
+                    weatherResults.Add("clouds", clouds);
+
+                    return weatherResults;
+                }
+            }
+            description = (string)json["list"][0]["weather"][0]["description"];
+            clouds = (string)json["list"][0]["clouds"]["all"];
 
             weatherResults.Add("description", description);
             weatherResults.Add("clouds", clouds);

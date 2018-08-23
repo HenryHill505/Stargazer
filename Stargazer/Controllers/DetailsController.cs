@@ -172,11 +172,30 @@ namespace Stargazer.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult GetWeather(string address)
+        public ActionResult GetWeather(string address, string date)
         {
-            Dictionary<string, double> coordinates = RequestManager.GeocodeAddress(address);
-            Dictionary<string, string> weatherResults = RequestManager.GetWeatherForecast(coordinates["latitude"], coordinates["longitude"]);
-            return PartialView("_Weather", weatherResults);
+            try
+            {
+                DateTime chosenDate = DateTime.Parse(date);
+
+                if ((chosenDate - DateTime.Now).Days > 5)
+                {
+                    return PartialView("_WeatherUnavailable");
+                }
+
+                Dictionary<string, double> coordinates = RequestManager.GeocodeAddress(address);
+
+                string dateString = $"{chosenDate.Year}-";
+                if (chosenDate.Month < 10) { dateString += "0"; }
+                dateString = $"{dateString}{chosenDate.Month}-{chosenDate.Day}";
+
+                Dictionary<string, string> weatherResults = RequestManager.GetWeatherForecast(coordinates["latitude"], coordinates["longitude"], dateString);
+                return PartialView("_Weather", weatherResults);
+            }
+            catch
+            {
+                return View("Error");
+            }
         }
     }
 }

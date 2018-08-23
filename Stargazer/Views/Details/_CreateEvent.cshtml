@@ -18,6 +18,7 @@
 
 </div>
 
+<p id="weather-button">Check Weather</p>
 <div id="weather-section">
     <div id="weather-box">
 
@@ -35,5 +36,14 @@
             url = url.replace(" ", "%20");
         }
         $("#result-box").load(url);
+    })
+    $("#weather-button").click(function () {
+        let date = $("#date-value").val();
+        let address = $("#location").val();
+        let url = "/Details/GetWeather?address=" + address + "&date=" + date;
+        for (i = 0; i < 10; i++) {
+            url = url.replace(" ", "%20");
+        }
+        $("#weather-box").load(url);
     })
 </script>
