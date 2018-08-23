@@ -340,6 +340,7 @@
     <Content Include="Views\Details\Star.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Home\_MapError.cshtml" />
+    <Content Include="Views\Details\_Weather.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

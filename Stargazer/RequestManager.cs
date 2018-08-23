@@ -195,17 +195,18 @@ namespace Stargazer
             return stars;
         }
 
-        public static Object GetWeatherForecast(double latitude, double longitude)
+        public static Dictionary<string, string> GetWeatherForecast(double latitude, double longitude)
         {
-            
+            Dictionary<string, string> weatherResults = new Dictionary<string, string>();
             string url = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&APPID=" + Keyring.OpenWeatherKey;
             JObject json = GetJsonObject(url).Result;
             string description = (string)json["list"][0]["weather"][0]["description"];
-            double clouds = (double)json["list"][0]["clouds"]["all"];
+            string clouds = (string)json["list"][0]["clouds"]["all"];
 
-            var result = new { description = description, clouds = clouds};
+            weatherResults.Add("description", description);
+            weatherResults.Add("clouds", clouds);
 
-            return result;
+            return weatherResults;
         }
 
         public static void SendSmsAlert(string bodyName, string location, DateTime date, string toNumber)

@@ -171,5 +171,12 @@ namespace Stargazer.Controllers
             
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult GetWeather(string address)
+        {
+            Dictionary<string, double> coordinates = RequestManager.GeocodeAddress(address);
+            Dictionary<string, string> weatherResults = RequestManager.GetWeatherForecast(coordinates["latitude"], coordinates["longitude"]);
+            return PartialView("_Weather", weatherResults);
+        }
     }
 }
