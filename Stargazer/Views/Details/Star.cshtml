@@ -15,8 +15,8 @@
 
 <h2>@Model.body.name</h2>
 
-<h4 id="details-header">Details</h4>
-<div id="details-section">
+<h4 id="details-header" class="section-header">Details</h4>
+<div id="details-section" class="section">
     <dl>
         <dt>Magnitude</dt>
         <dd>@Model.body.magnitude</dd>
@@ -41,9 +41,9 @@
         <input id="longitude" type="text" value="-87.911910" />
     </label>*@
 
-<h4 id="map-header">Find A Viewing Spot</h4>
+<h4 id="map-header" class="section-header">Find A Viewing Spot</h4>
 
-<div id="map-section">
+<div id="map-section" class="section">
 
     <div><b>Priority</b></div>
 
@@ -78,8 +78,8 @@
     </div>
 </div>
 
-<h4 id="picture-header">Pictures</h4>
-<div id="picture-section">
+<h4 id="picture-header" class="section-header">Pictures</h4>
+<div id="picture-section" class="section">
     @Ajax.ActionLink("Show pictures", "GetPictures", new { bodyName = Model.body.name }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "picture-box", InsertionMode = InsertionMode.Replace })
 
     <div id="picture-box">
@@ -88,8 +88,8 @@
     @Html.ActionLink("Add a Picture", "PictureUpload", new { bodyName = Model.body.name })
 </div>
 
-<h4 id="event-header">Events</h4>
-<div>
+<h4 id="event-header" class="section-header">Events</h4>
+<div id="event-section">
     <table>
         <tr>
             @foreach (Event newEvent in Model.events)
@@ -101,7 +101,7 @@
 
     @if (User.Identity.IsAuthenticated)
     {
-        <button id="event-button">Create Event</button>
+        <button id="event-button" >Create Event</button>
     }
 
     <div id="event-box">
@@ -112,6 +112,11 @@
 <script src="/Scripts/jquery-3.3.1.js"></script>
 <script>
     $("document").ready(function () {
+
+        $("#map-section").hide();
+        $("#picture-section").hide();
+        $("#event-section").hide();
+
         $("#map-button").click(function () {
             //let latitude = $("#latitude").val();
             //let longitude = $("#longitude").val();
@@ -129,6 +134,19 @@
         })
         $("#event-button").click(function () {
             $("#event-box").load("/Details/GetEventPartial");
+        })
+
+        $("#details-header").click(function () {
+            $("#details-section").toggle("slow");
+        })
+        $("#map-header").click(function () {
+            $("#map-section").toggle("slow");
+        })
+        $("#picture-header").click(function () {
+            $("#picture-section").toggle("slow");
+        })
+        $("#event-header").click(function () {
+            $("#event-section").toggle("slow");
         })
     })
 </script>

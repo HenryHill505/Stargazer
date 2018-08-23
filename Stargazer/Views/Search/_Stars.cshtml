@@ -1,10 +1,15 @@
 ﻿@model List<Star>
 
 <table>
+    <tr>
+        <th>Star Name</th>
+        <th>Magnitude</th>
+    </tr>
     @foreach (Star star in Model)
     {
         <tr>
             <td>@Html.ActionLink(@star.name, "GetStarDetails", "Details", new { name = star.name, magnitude = star.magnitude, declination = star.declination, rightAscension = star.rightAscension }, new { })</td>
+            <td>@star.magnitude</td>
         </tr>
     }
 </table>

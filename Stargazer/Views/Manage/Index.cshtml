@@ -58,7 +58,7 @@
                     <li>
                         <a href="/Home/EventDetails?Id=@newEvent.Id">
                             <span>@newEvent.CosmicBody</span>
-                            <span>@newEvent.Date</span>
+                            <span>@newEvent.Date.ToShortDateString()</span>
                             <span>@newEvent.Location</span>
                         </a>
                     </li>

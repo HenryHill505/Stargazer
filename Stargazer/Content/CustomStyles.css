@@ -1,4 +1,23 @@
 ﻿body {
+    background-color: black;
+    color: white;
+}
+
+a {
+    color:gold;
+}
+
+button{
+    color:black;
+    background-color: white;
+}
+
+a:visited{
+    color: goldenrod;
+}
+
+ a:hover {
+    color: goldenrod;
 }
 
 #home-image{
@@ -6,3 +25,39 @@
     max-height: 500px;
     max-width: 500px;
 }
+
+div.navbar{
+    color: gold;
+    background-color: navy;
+}
+
+.user-picture{
+    height: 150px;
+    width: 150px;
+    border: 1px solid white;
+    padding: 3px;
+}
+
+div.section{
+    border-top: 1px solid white;
+}
+
+.section-header{
+    cursor: pointer;
+}
+
+#home-header{
+    border-bottom: 1px solid white;
+}
+
+#home-event-feed {
+    height: 500px;
+    overflow-y: scroll
+}
+
+#home-event-feed li {
+    list-style: none;
+}
+
+
+
