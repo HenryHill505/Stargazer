@@ -3,4 +3,6 @@
 
 #home-image{
     border-radius: 25px;
+    max-height: 500px;
+    max-width: 500px;
 }
