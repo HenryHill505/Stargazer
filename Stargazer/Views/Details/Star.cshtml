@@ -41,7 +41,7 @@
         <input id="longitude" type="text" value="-87.911910" />
     </label>*@
 
-<h4 id="map-header" class="section-header">Find A Viewing Spot</h4>
+<h4 id="map-header" class="section-header">Viewing Spots</h4>
 
 <div id="map-section" class="section">
 
@@ -85,16 +85,27 @@
     <div id="picture-box">
 
     </div>
-    @Html.ActionLink("Add a Picture", "PictureUpload", new { bodyName = Model.body.name })
+    @*@Html.ActionLink("Add a Picture", "PictureUpload", new { bodyName = Model.body.name })*@
+    @Ajax.ActionLink("Add a Picture", "GetUploadPartial", new { bodyName = Model.body.name }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "picture-upload-box", InsertionMode = InsertionMode.Replace })
+    <div id="picture-upload-box">
+        
+    </div>
 </div>
 
 <h4 id="event-header" class="section-header">Events</h4>
 <div id="event-section">
     <table>
         <tr>
-            @foreach (Event newEvent in Model.events)
+            @if (Model.events.Count > 0)
             {
-                <td>@Html.ActionLink(newEvent.Location + ", " + newEvent.Date.ToShortDateString(), "EventDetails", new { Id = newEvent.Id })</td>
+                foreach (Event newEvent in Model.events)
+                {
+                    <td>@Html.ActionLink(newEvent.Location + ", " + newEvent.Date.ToShortDateString(), "EventDetails", new { Id = newEvent.Id })</td>
+                }
+            }
+            else
+            {
+                <td>There are no upcoming events</td>
             }
         </tr>
     </table>

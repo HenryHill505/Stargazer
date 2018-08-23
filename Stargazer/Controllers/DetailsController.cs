@@ -197,5 +197,10 @@ namespace Stargazer.Controllers
                 return View("Error");
             }
         }
+
+        public ActionResult GetUploadPartial(string bodyName)
+        {
+            return PartialView("_UploadPicture", bodyName);
+        }
     }
 }

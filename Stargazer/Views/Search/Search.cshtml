@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Star>
 @{
     ViewBag.Title = "Search";
 }
@@ -8,9 +8,9 @@
 
 
 @*@Ajax.ActionLink("Comets", "GetComets", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "results-box", InsertionMode = InsertionMode.Replace })*@
-@Ajax.ActionLink("Stars", "GetStars", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "results-box", InsertionMode = InsertionMode.Replace })
+@*@Ajax.ActionLink("Stars", "GetStars", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "results-box", InsertionMode = InsertionMode.Replace })*@
 
 <div id="results-box">
-
+    @Html.Partial("_Stars", Model)
 </div>
 
