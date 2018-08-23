@@ -219,8 +219,8 @@ namespace Stargazer
                     return weatherResults;
                 }
             }
-            description = (string)json["list"][0]["weather"][0]["description"];
-            clouds = (string)json["list"][0]["clouds"]["all"];
+            description = (string)json["list"][resultCount-1]["weather"][0]["description"];
+            clouds = (string)json["list"][resultCount-1]["clouds"]["all"];
 
             weatherResults.Add("description", description);
             weatherResults.Add("clouds", clouds);

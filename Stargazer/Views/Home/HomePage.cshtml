@@ -16,7 +16,7 @@
     <ul>
         @foreach (Event newEvent in Model)
         {
-            <li>@Html.ActionLink(newEvent.Date.ToString(), "EventDetails", new { Id = newEvent.Id })</li>
+            <li>@Html.ActionLink(newEvent.CosmicBody + ", " + newEvent.Location + ", "+ newEvent.Date.ToShortDateString(), "EventDetails", new { Id = newEvent.Id })</li>
         }
     </ul>
 </div>

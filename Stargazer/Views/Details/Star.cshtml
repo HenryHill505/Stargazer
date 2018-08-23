@@ -94,12 +94,15 @@
         <tr>
             @foreach (Event newEvent in Model.events)
             {
-                <td>@Html.ActionLink(newEvent.Date.ToString(), "EventDetails", new { Id = newEvent.Id })</td>
+                <td>@Html.ActionLink(newEvent.Location + ", " + newEvent.Date.ToShortDateString(), "EventDetails", new { Id = newEvent.Id })</td>
             }
         </tr>
     </table>
 
-    <button id="event-button">Create Event</button>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <button id="event-button">Create Event</button>
+    }
 
     <div id="event-box">
 
