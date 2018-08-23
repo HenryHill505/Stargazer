@@ -157,19 +157,26 @@ namespace Stargazer.Controllers
         [HttpPost]
         public ActionResult UploadPicture(HttpPostedFileBase file, string cosmicBody)
         {
-            if (file.ContentLength > 0)
+            try
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/App_Data/"), fileName);
-                file.SaveAs(path);
+                if (file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/App_Data/"), fileName);
+                    file.SaveAs(path);
 
-                var imageProperties = RequestManager.PostImgur(path);
-                Picture picture = new Picture() { DeleteHash = imageProperties["deleteHash"], Link = imageProperties["imageUrl"], BodyName = cosmicBody, UserId = User.Identity.GetUserId() };
-                db.Pictures.Add(picture);
-                db.SaveChanges();
+                    var imageProperties = RequestManager.PostImgur(path);
+                    Picture picture = new Picture() { DeleteHash = imageProperties["deleteHash"], Link = imageProperties["imageUrl"], BodyName = cosmicBody, UserId = User.Identity.GetUserId() };
+                    db.Pictures.Add(picture);
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("Search", "Search");
             }
-            
-            return RedirectToAction("Index", "Home");
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public ActionResult GetWeather(string address, string date)

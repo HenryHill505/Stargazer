@@ -7,6 +7,11 @@ a {
     color:gold;
 }
 
+input {
+    color: black;
+    margin: 3px;
+}
+
 button{
     color:black;
     background-color: white;
@@ -58,6 +63,16 @@ div.section{
 #home-event-feed li {
     list-style: none;
 }
+
+#file {
+    color: white;
+}
+
+#map {
+    color: black;
+}
+
+
 
 
 
