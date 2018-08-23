@@ -9,16 +9,28 @@
 @Model.GetReminders
 @Model.ReminderTime
 
+<p>Recieve text reminders?</p>
+
 @using (Html.BeginForm("ChangeTextReminder","Manage",FormMethod.Post))
 {
-    @Html.RadioButtonFor(m => m.GetReminders, true)
-    @Html.RadioButtonFor(m => m.GetReminders, false)
-
-    @Html.DropDownListFor(m => m.ReminderTime, new SelectList( new List<int>(){1, 2, 3, 4, 5, 6, 7} ))
-
-   <formgroup>
-       <button type="submit">Submit Change</button>
-   </formgroup>
+    <div>
+        <span>Yes:</span>
+        @Html.RadioButtonFor(m => m.GetReminders, true)
+        <span>No:</span>
+        @Html.RadioButtonFor(m => m.GetReminders, false)
+    </div>
+    <div>
+        <br />
+        <span>Days in Advance:</span>
+        @Html.DropDownListFor(m => m.ReminderTime, new SelectList(new List<int>() { 1, 2, 3, 4, 5, 6, 7 }))
+        
+    </div>
+    <div>
+        <br />
+        <formgroup>
+            <button type="submit">Submit Change</button>
+        </formgroup>
+    </div>
 }
 
 

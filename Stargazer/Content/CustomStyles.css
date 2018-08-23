@@ -17,6 +17,14 @@ button{
     background-color: white;
 }
 
+option {
+    color: black;
+}
+
+select {
+    color: black;
+}
+
 a:visited{
     color: goldenrod;
 }
@@ -71,6 +79,8 @@ div.section{
 #map {
     color: black;
 }
+
+
 
 
 
