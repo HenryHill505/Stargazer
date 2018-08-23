@@ -15,18 +15,21 @@
 
 <h2>@Model.body.name</h2>
 
-<dl>
-    <dt>Magnitude</dt>
-    <dd>@Model.body.magnitude</dd>
-    <dt>Declination</dt>
-    <dd>@Model.body.declination</dd>
-    <dt>Right Ascension</dt>
-    <dd>@Model.body.rightAscension</dd>
-    <dt>Viewing Aperatus</dt>
-    <dd>@StarCalculator.GetRequiredMagnification(@Model.body.magnitude)</dd>
-    <dt>Peak visibility</dt>
-    <dd>@StarCalculator.GetPeakVisibilityMonth(@Model.body.rightAscension)</dd>
-</dl>
+<h4 id="details-header">Details</h4>
+<div id="details-section">
+    <dl>
+        <dt>Magnitude</dt>
+        <dd>@Model.body.magnitude</dd>
+        <dt>Declination</dt>
+        <dd>@Model.body.declination</dd>
+        <dt>Right Ascension</dt>
+        <dd>@Model.body.rightAscension</dd>
+        <dt>Viewing Aperatus</dt>
+        <dd>@StarCalculator.GetRequiredMagnification(@Model.body.magnitude)</dd>
+        <dt>Peak visibility</dt>
+        <dd>@StarCalculator.GetPeakVisibilityMonth(@Model.body.rightAscension)</dd>
+    </dl>
+</div>
 
 @*<label>
         Latitude
@@ -38,60 +41,69 @@
         <input id="longitude" type="text" value="-87.911910" />
     </label>*@
 
-@if (User.Identity.IsAuthenticated && Model.userAddress != null)
-{
-    <label>
-        Address
-        <input id="address" type="text" value="@Model.userAddress" />
-    </label>
-}
-else
-{
-    <label>
-        Address
-        <input id="address" type="text" />
-    </label>
-}
+<h4 id="map-header">Find A Viewing Spot</h4>
 
+<div id="map-section">
 
-<button id="map-button">Map</button>
-<div>
+    <div><b>Priority</b></div>
+
     <input type="radio" class="map-priority" name="map-priority" value="nearness" checked="checked" />
     <span>Nearness</span>
-</div>
-<div>
     <input type="radio" class="map-priority" name="map-priority" value="view" />
     <span>View</span>
-</div>
-@*@Ajax.ActionLink("Map", "Map", new { latitude = 43.033580, longitude = -87.911910, magnitude = 1 }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "map-box", InsertionMode = InsertionMode.Replace })*@
 
-
-<div id="map-box">
-
-</div>
-
-<table>
-    <tr>
-        @foreach (Event newEvent in Model.events)
+    <div>
+        @if (User.Identity.IsAuthenticated && Model.userAddress != null)
         {
-            <td>@Html.ActionLink(newEvent.Date.ToString(), "EventDetails", new { Id = newEvent.Id })</td>
+            <label>
+                Address
+                <input id="address" type="text" value="@Model.userAddress" />
+            </label>
         }
-    </tr>
-</table>
+        else
+        {
+            <label>
+                Starting Address:
+                <input id="address" type="text" />
+            </label>
+        }
 
-<button id="event-button">Event</button>
+        <button id="map-button">Search</button>
+    </div>
+    @*@Ajax.ActionLink("Map", "Map", new { latitude = 43.033580, longitude = -87.911910, magnitude = 1 }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "map-box", InsertionMode = InsertionMode.Replace })*@
 
 
-<div id="event-box">
+    <div id="map-box">
 
+    </div>
 </div>
 
+<h4 id="picture-header">Pictures</h4>
+<div id="picture-section">
+    @Ajax.ActionLink("Show pictures", "GetPictures", new { bodyName = Model.body.name }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "picture-box", InsertionMode = InsertionMode.Replace })
 
-@Ajax.ActionLink("Show pictures", "GetPictures", new { bodyName = Model.body.name }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "picture-box", InsertionMode = InsertionMode.Replace })
-@Html.ActionLink("Add Pictures", "PictureUpload", new { bodyName = Model.body.name })
+    <div id="picture-box">
 
-<div id="picture-box">
+    </div>
+    @Html.ActionLink("Add a Picture", "PictureUpload", new { bodyName = Model.body.name })
+</div>
 
+<h4 id="event-header">Events</h4>
+<div>
+    <table>
+        <tr>
+            @foreach (Event newEvent in Model.events)
+            {
+                <td>@Html.ActionLink(newEvent.Date.ToString(), "EventDetails", new { Id = newEvent.Id })</td>
+            }
+        </tr>
+    </table>
+
+    <button id="event-button">Create Event</button>
+
+    <div id="event-box">
+
+    </div>
 </div>
 
 <script src="/Scripts/jquery-3.3.1.js"></script>
