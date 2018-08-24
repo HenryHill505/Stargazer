@@ -8,9 +8,9 @@
 <h2>Event</h2>
 
 <h2>@Model.CosmicBody</h2>
-<h2>@Model.Date</h2>
+<h2>@Model.Date.ToShortDateString()</h2>
 <h2>@Model.Location</h2>
-<h2>@Model.UserId</h2>
+<h2>@Model.User.Email</h2>
 
 @if (User.Identity.IsAuthenticated && User.Identity.GetUserId() != Model.UserId)
 {

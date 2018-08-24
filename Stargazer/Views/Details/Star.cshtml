@@ -24,7 +24,7 @@
         <dd>@Model.body.declination</dd>
         <dt>Right Ascension</dt>
         <dd>@Model.body.rightAscension</dd>
-        <dt>Viewing Aperatus</dt>
+        <dt>Viewing Apparatus</dt>
         <dd>@StarCalculator.GetRequiredMagnification(@Model.body.magnitude)</dd>
         <dt>Peak visibility</dt>
         <dd>@StarCalculator.GetPeakVisibilityMonth(@Model.body.rightAscension)</dd>
@@ -100,7 +100,7 @@
             {
                 foreach (Event newEvent in Model.events)
                 {
-                    <td>@Html.ActionLink(newEvent.Location + ", " + newEvent.Date.ToShortDateString(), "EventDetails", new { Id = newEvent.Id })</td>
+                    <td>@Html.ActionLink(newEvent.Location + ", " + newEvent.Date.ToShortDateString(), "EventDetails", "Home",new { Id = newEvent.Id },new { })</td>
                 }
             }
             else

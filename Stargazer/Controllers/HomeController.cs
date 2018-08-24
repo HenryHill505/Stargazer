@@ -43,7 +43,7 @@ namespace Stargazer.Controllers
 
         public ActionResult EventDetails(int Id)
         {
-            Event selectedEvent = db.Events.Where(e => e.Id == Id).FirstOrDefault();
+            Event selectedEvent = db.Events.Include("User").Where(e => e.Id == Id).FirstOrDefault();
             return View("EventDetails", selectedEvent);
         }
 
