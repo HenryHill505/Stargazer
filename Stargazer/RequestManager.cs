@@ -32,27 +32,30 @@ namespace Stargazer
         {
             address = address.Replace(" ", "+");
             string url = GoogleGeocode + address + "&key=" + Keyring.GoogleMapsKey;
+
             JObject json = GetJsonObject(url).Result;
             double latitude = (double)json["results"][0]["geometry"]["location"]["lat"];
             double longitude = (double)json["results"][0]["geometry"]["location"]["lng"];
+
             Dictionary<string, double> coordinates = new Dictionary<string, double>();
             coordinates.Add("latitude", latitude);
             coordinates.Add("longitude", longitude);
             return coordinates;
         }
-        private static async Task<JObject> GetPictureOfTheDayJSON()
-        {
-            HttpClient client = new HttpClient();
-            var response = await client.GetAsync(PictureOfTheDayService).ConfigureAwait(false);
-            string responseBody = await response.Content.ReadAsStringAsync();
-            JObject json = JObject.Parse(responseBody);
-            return json;
+        //private static async Task<JObject> GetPictureOfTheDayJSON()
+        //{
+        //    HttpClient client = new HttpClient();
+        //    var response = await client.GetAsync(PictureOfTheDayService).ConfigureAwait(false);
+        //    string responseBody = await response.Content.ReadAsStringAsync();
+        //    JObject json = JObject.Parse(responseBody);
+        //    return json;
            
-        }
+        //}
 
         public static string GetPictureOfTheDayUrl()
         {
-            JObject json = GetPictureOfTheDayJSON().Result;
+            //JObject json = GetPictureOfTheDayJSON().Result;
+            JObject json = GetJsonObject(PictureOfTheDayService).Result;
             return (string)json["url"];
         }
 
