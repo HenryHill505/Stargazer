@@ -23,6 +23,10 @@ namespace Stargazer
         static string DatastroLightPollution = "https://www.datastro.eu/api/records/1.0/search/?dataset=imageserver&sort=-dist&facet=localdate&facet=utdate&facet=limitingmag&facet=cloudcover&facet=constellation&facet=country&facet=filename";
         static string GooglePlaces = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
         static string GoogleGeocode = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+        static string ImgurImage = "https://api.imgur.com/3/image/";
+        static string ImgurUpload = "https://api.imgur.com/3/upload.json";
+        static string AstropicalStars = "http://www.astropical.space/astrodb/api.php?table=stars&format=json";
+        static string OpenWeatherForecast = "https://api.openweathermap.org/data/2.5/forecast";
 
         public static Dictionary<string, double> GeocodeAddress(string address)
         {
@@ -107,7 +111,7 @@ namespace Stargazer
         
         public static async Task<string> GetImgur(string imageHash)
         {
-            string url = "https://api.imgur.com/3/image/" + imageHash;
+            string url = ImgurImage + imageHash;
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", "Client-ID " + Keyring.ImgurClientId);
             var response = await client.GetAsync(url).ConfigureAwait(false);
@@ -120,7 +124,7 @@ namespace Stargazer
 
         public static Dictionary<string, string> PostImgur(string imagePath)
         {
-            string url = "https://api.imgur.com/3/upload.json";
+            string url = ImgurUpload;
             Dictionary<string, string> imageProperties = new Dictionary<string, string>();
             using (var client = new WebClient())
             {
@@ -183,7 +187,7 @@ namespace Stargazer
         public static List<Star> GetStars()
         {
             List<Star> stars = new List<Star>();
-            string url = "http://www.astropical.space/astrodb/api.php?table=stars&format=json";
+            string url = AstropicalStars;
             JObject json = GetJsonObject(url).Result;
             int starCount = json["hipstars"].Count();
 
@@ -198,7 +202,7 @@ namespace Stargazer
         public static Dictionary<string, string> GetWeatherForecast(double latitude, double longitude, string dateString)
         {
             Dictionary<string, string> weatherResults = new Dictionary<string, string>();
-            string url = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&APPID=" + Keyring.OpenWeatherKey;
+            string url = OpenWeatherForecast+"?lat=" + latitude + "&lon=" + longitude + "&APPID=" + Keyring.OpenWeatherKey;
             JObject json = GetJsonObject(url).Result;
             int resultCount = json["list"].Count();
 
