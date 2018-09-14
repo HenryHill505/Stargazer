@@ -77,20 +77,21 @@ namespace Stargazer
             return json;
         }
 
-        private static async Task<JArray> GetCometJSON()
-        {
-            HttpClient client = new HttpClient();
-            var response = await client.GetAsync(NearEarthCometsService).ConfigureAwait(false);
-            string responseBody = await response.Content.ReadAsStringAsync();
-            JArray json = JArray.Parse(responseBody);
-            return json;
-        }
+        //private static async Task<JArray> GetCometJSON()
+        //{
+        //    HttpClient client = new HttpClient();
+        //    var response = await client.GetAsync(NearEarthCometsService).ConfigureAwait(false);
+        //    string responseBody = await response.Content.ReadAsStringAsync();
+        //    JArray json = JArray.Parse(responseBody);
+        //    return json;
+        //}
 
         public static List<Comet> GetCometList()
         {
             List<Comet> comets = new List<Comet>();
 
-            JArray json = GetCometJSON().Result;
+            //JArray json = GetCometJSON().Result;
+            JArray json = GetJsonArray(NearEarthCometsService).Result;
             int cometCount = json.Count;
             for (int i = 0; i < cometCount; i++)
             {
@@ -99,7 +100,6 @@ namespace Stargazer
                     comets.Add(new Comet() { name = (string)json[i]["designation"], magnitude = (double)json[i]["h_mag"] });
                 }
             }
-
             return comets;
         }
 
